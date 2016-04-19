@@ -48,6 +48,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    commonjs (0.2.7)
     concurrent-ruby (1.0.1)
     debug_inspector (0.0.2)
     erubis (2.7.0)
@@ -63,11 +64,20 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    less (2.6.0)
+      commonjs (~> 0.2.7)
+    less-rails (2.7.1)
+      actionpack (>= 4.0)
+      less (~> 2.6.0)
+      sprockets (> 2, < 4)
+      tilt
     libv8 (3.16.14.13)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    metro-ui-rails (0.15.8.15)
+      less-rails (> 2.2.3)
     mime-types (3.0)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0221)
@@ -152,6 +162,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
+  metro-ui-rails
   rails (= 4.2.6)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
