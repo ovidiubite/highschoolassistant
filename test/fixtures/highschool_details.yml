@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  students_number: 1
+  last_rate: 1
+  year: 1
+
+two:
+  students_number: 1
+  last_rate: 1
+  year: 1
