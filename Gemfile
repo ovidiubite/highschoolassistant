@@ -11,6 +11,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
+gem 'activeadmin', github: 'activeadmin'
+gem "activerecord-import"
 
 group :development, :test do
   gem 'byebug'
@@ -19,4 +21,5 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'annotate'
 end

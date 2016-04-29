@@ -1,3 +1,3 @@
 class Section < ActiveRecord::Base
-  belongs_to :highschool_detail
+  has_many :highschool_detail
 end

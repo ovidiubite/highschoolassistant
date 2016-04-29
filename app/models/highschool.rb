@@ -1,4 +1,4 @@
 class Highschool < ActiveRecord::Base
-  has_one :county
+  belongs_to :county
   has_many :highschool_details
 end

@@ -1,3 +1,3 @@
 class County < ActiveRecord::Base
-  belongs_to :highschool
+  has_many :highschools
 end
