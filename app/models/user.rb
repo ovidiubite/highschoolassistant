@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :role
-  validates_presence_of :role
   validates_length_of :email, maximum: 100
 
   def user?
