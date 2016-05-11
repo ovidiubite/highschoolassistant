@@ -11,9 +11,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
-gem 'activeadmin', github: 'activeadmin'
-gem "activerecord-import"
-gem "active_admin_import" , github: "activeadmin-plugins/active_admin_import"
 gem 'cancancan', '~> 1.10'
 
 group :development, :test do

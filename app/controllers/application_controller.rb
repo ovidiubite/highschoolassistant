@@ -4,10 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |exception|
-    # if current_user && current_user.admin?
-    #   redirect_to admin_root_url, :alert => exception.message
-    # else
-    #   redirect_to root_url, :alert => exception.message
-    # end
+    redirect_to root_url, :alert => exception.message
   end
 end

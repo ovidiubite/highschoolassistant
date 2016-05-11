@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, {class_name: 'User'}.merge(ActiveAdmin::Devise.config)
-
   devise_for :users
-  resources :users
 
-  root 'users#index'
+  root 'home#render_dashboard'
 
+  get 'users', to: 'users#index'
+  get 'show/:id', to: 'users#show', as: 'user'
+  delete 'destroy/:id', to: 'users#destroy', as: 'destroy_user'
+
+  get 'admin_dashboard',         to: 'admin#dashboard'
+  post 'import_highschools',     to: 'admin#import_highschools'
 end
