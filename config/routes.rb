@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  ResqueWeb::Engine.eager_load!
+  mount ResqueWeb::Engine => '/resque_web'
+
   root 'home#render_dashboard'
 
   get 'users', to: 'users#index'

@@ -5,9 +5,9 @@ class AdminController < ApplicationController
   end
 
   def import_highschools
-    ap "==================="
-    ap params
-    redirect_to root_path, notice: "File successfully uploaded" if Importer.import_highschools(params[:file])
+    Resque.enqueue(CsvImporterWorker, params[:file].path)
+
+    redirect_to root_path, notice: "File successfully uploaded"
   end
   private
 

@@ -12,6 +12,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'cancancan', '~> 1.10'
+gem 'resque'
+gem 'resque-web', require: 'resque_web'
 
 group :development, :test do
   gem 'byebug'
