@@ -1,7 +1,34 @@
 <h3> Admin Dashboard </h3>
 
-<%= form_tag import_highschools_path, multipart: true do %>
-    <label for="file">File to Upload</label><br/><br/>
-    <%= file_field_tag "file" %><br/><br/>
-    <%= submit_tag "Upload csv"%>
-<% end %>
+<div class="tile-square bg-cobalt">
+    <div class = "tile-content">
+        <%= form_tag import_highschools_path, multipart: true do %>
+                <span class="tile-label">Highschools</span>
+                <%= file_field_tag "file" %><br/><br/>
+                <%= submit_tag "Upload csv"%>
+        <% end %>
+    </div>
+</div>
+<div class="tile-square bg-cobalt">
+    <%= form_tag import_counties_path, multipart: true do %>
+        <label for="file">Counties</label><br/><br/>
+        <%= file_field_tag "file" %><br/><br/>
+        <%= submit_tag "Upload csv"%>
+    <% end %>
+</div>
+
+<div class="tile-square bg-cobalt">
+    <%= form_tag import_admission_results_path, multipart: true do %>
+        <label for="file">Admission results</label><br/><br/>
+        <%= file_field_tag "file" %><br/><br/>
+        <%= submit_tag "Upload csv"%>
+    <% end %>
+</div>
+
+<div class="tile-square bg-cobalt">
+    <%= form_tag import_evaluation_results_path, multipart: true do %>
+        <label for="file">Evaluation results</label><br/><br/>
+        <%= file_field_tag "file" %><br/><br/>
+        <%= submit_tag "Upload csv"%>
+    <% end %>
+</div>
