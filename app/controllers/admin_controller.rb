@@ -1,4 +1,6 @@
 class AdminController < ApplicationController
+  before_action :set_user
+  load_and_authorize_resource :class => self.class
 
   # admin dashboard
   def dashboard

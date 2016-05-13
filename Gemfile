@@ -14,6 +14,7 @@ gem 'devise'
 gem 'cancancan', '~> 1.10'
 gem 'resque'
 gem 'resque-web', require: 'resque_web'
+gem 'toastr-rails'
 
 group :development, :test do
   gem 'byebug'

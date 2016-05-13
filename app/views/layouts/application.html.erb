@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Highschoolassistant" %></title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag "application", :media => "all" %>
-
+    <%= javascript_include_tag "application" %>
   </head>
 
   <body class="metro">
@@ -24,18 +23,15 @@
                 <ul class="app-bar-menu", style="float:right">
                     <li><%= link_to "Log in", new_user_session_path unless current_user %></li>
                     <li><%= link_to "Sign up", new_user_registration_path unless current_user %></li>
-                    <li><%= link_to "Sign out", destroy_user_session_path if current_user %></li>
+                    <li><%= link_to "Sign out", destroy_user_session_path, method: :delete if current_user %></li>
                 </ul>
                 <span class="app-bar-pull"></span>
             <div class="app-bar-pullbutton automatic" style="display: none;"></div><div class="clearfix" style="width: 0;"></div><nav class="app-bar-pullmenu hidden flexstyle-app-bar-menu" style="display: none;"><ul class="app-bar-pullmenubar hidden app-bar-menu"></ul></nav></div>
           </header>
       </div>
-
       <div class="container page-content">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+          <%= render 'layouts/notifications' %>
           <%= yield %>
       </div>
-      <%= javascript_include_tag "application" %>
   </body>
 </html>
