@@ -11,7 +11,7 @@ class Importer
     Highschool.delete_all
     csv.each do |row|
       Highschool.create!(name: row['Nume Scoala'],
-                         county: County.where(name: row['Judet']).first) unless Highschool.find(name: row['Nume Scoala'])
+                         county: County.where(name: row['Judet']).first) unless Highschool.find_by_name(row['Nume Scoala'])
     end
   end
 
@@ -43,7 +43,8 @@ class Importer
   # import counties and save them to the Counties table
   # @param file [String] - path to the temporary csv file
   #
-  # @return [Highschool]def self.import_counties(file)
+  # @return [Highschool]
+  def self.import_counties(file)
     County.delete_all
     csv_text = File.read(file)
     csv = CSV.parse(csv_text, :headers => true)

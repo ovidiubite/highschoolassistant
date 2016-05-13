@@ -7,28 +7,31 @@ class AdminController < ApplicationController
   end
 
   def import_highschools
-    return redirect_to root_path, warning: "You don't have any county the DB. Please import first the counties!"
+    return redirect_to root_path, error: "You don't have any county saved in the DB. Please import first the counties!" unless County.any?
     Resque.enqueue(CsvImporterWorker, params[:file].path, 'import_highschools')
-    redirect_to root_path, notice: "File successfully sent to process"
+    succes_call
   end
 
   def import_counties
     Resque.enqueue(CsvImporterWorker, params[:file].path, 'import_counties')
-    redirect_to root_path, notice: "File successfully sent to process"
+    succes_call
   end
 
   def import_admission_results
     Resque.enqueue(CsvImporterWorker, params[:file].path, 'import_admission_results')
-    redirect_to root_path, notice: "File successfully sent to process"
+    succes_call
   end
 
   def import_evaluation_results
     Resque.enqueue(CsvImporterWorker, params[:file].path, 'import_evaluation_results')
-    redirect_to root_path, notice: "File successfully sent to process"
+    succes_call
   end
 
   private
 
+  def succes_call
+    redirect_to root_path, notice: "File successfully sent to process"
+  end
   def set_user
     @user = current_user
   end
