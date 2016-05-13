@@ -7,6 +7,7 @@ class AdminController < ApplicationController
   end
 
   def import_highschools
+    return redirect_to root_path, warning: "You don't have any county the DB. Please import first the counties!"
     Resque.enqueue(CsvImporterWorker, params[:file].path, 'import_highschools')
     redirect_to root_path, notice: "File successfully sent to process"
   end
