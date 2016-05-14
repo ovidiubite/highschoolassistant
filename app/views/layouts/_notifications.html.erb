@@ -1,0 +1,9 @@
+<% unless flash.empty? %>
+
+  <script type="text/javascript">
+    <% flash.each do |f| %>
+          <% type = f[0].gsub('alert', 'error').gsub('danger', 'error').gsub('notice', 'success') %>
+          toastr['<%= type %>']('<%= f[1] %>', '<%= type.capitalize %>');
+      <% end %>
+  </script>
+<% end %>

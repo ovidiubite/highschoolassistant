@@ -1,8 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Hello world</h1>
-<h3> Highschool Assistant </h3>
-<table>
+<h3> Users </h3>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -14,14 +11,12 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', user_path(user) %></td>
+        <td><%= link_to 'Edit', edit_user_registration_path(user) %></td>
+        <td><%= link_to 'Destroy', destroy_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New User', new_user_path %>
