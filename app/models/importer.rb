@@ -25,6 +25,7 @@ class Importer
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
       # add logic to insert into db
+      AdmissionResult.import_data(row)
     end
     csv_processed_email('admission results')
   end
@@ -38,6 +39,7 @@ class Importer
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
       # add logic to insert into db
+      EvaluationResult.import_data(row)
     end
     csv_processed_email('evaluation results')
   end
@@ -58,7 +60,7 @@ class Importer
 
   private
 
-  def csv_processed_email(import_type)
+  def self.csv_processed_email(import_type)
     NotificationMailer.csv_successfully_imported(import_type)
   end
 end

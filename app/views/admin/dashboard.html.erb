@@ -1,34 +1,45 @@
 <h3> Admin Dashboard </h3>
 
-<div class="tile-square bg-cobalt">
-    <div class = "tile-content">
-        <%= form_tag import_highschools_path, multipart: true do %>
-                <span class="tile-label">Highschools</span>
-                <%= file_field_tag "file" %><br/><br/>
-                <%= submit_tag "Upload csv"%>
-        <% end %>
-    </div>
-</div>
-<div class="tile-square bg-cobalt">
-    <%= form_tag import_counties_path, multipart: true do %>
-        <label for="file">Counties</label><br/><br/>
-        <%= file_field_tag "file" %><br/><br/>
-        <%= submit_tag "Upload csv"%>
-    <% end %>
-</div>
-
-<div class="tile-square bg-cobalt">
-    <%= form_tag import_admission_results_path, multipart: true do %>
-        <label for="file">Admission results</label><br/><br/>
-        <%= file_field_tag "file" %><br/><br/>
-        <%= submit_tag "Upload csv"%>
-    <% end %>
-</div>
-
-<div class="tile-square bg-cobalt">
-    <%= form_tag import_evaluation_results_path, multipart: true do %>
-        <label for="file">Evaluation results</label><br/><br/>
-        <%= file_field_tag "file" %><br/><br/>
-        <%= submit_tag "Upload csv"%>
-    <% end %>
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th  style="text-align:center">DB Tabel</th>
+            <th  style="text-align:center">Data count</th>
+            <th colspan="2"  style="text-align:center">Import Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Highschools</td>
+            <td><%= Highschool.count %></td>
+            <%= form_tag import_highschools_path, multipart: true do %>
+                <td><%= file_field_tag "file" %></td>
+                <td><%= submit_tag "Process csv"%></td>
+            <% end %>
+        </tr>
+        <tr>
+            <td>Counties</td>
+            <td><%= County.count %></td>
+            <%= form_tag import_counties_path, multipart: true do %>
+                <td><%= file_field_tag "file" %></td>
+                <td><%= submit_tag "Process csv"%></td>
+            <% end %>
+        </tr>
+        <tr>
+            <td>Evaluation Results</td>
+            <td><%= EvaluationResult.count %></td>
+            <%= form_tag import_evaluation_results_path, multipart: true do %>
+                <td><%= file_field_tag "file" %></td>
+                <td><%= submit_tag "Process csv"%></td>
+            <% end %>
+        </tr>
+        <tr>
+            <td>Admission Results</td>
+            <td><%= AdmissionResult.count %></td>
+            <%= form_tag import_admission_results_path, multipart: true do %>
+                <td><%= file_field_tag "file" %></td>
+                <td><%= submit_tag "Process csv"%></td>
+            <% end %>
+        </tr>
+    </tbody>
+</table>

@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
   before_action :set_user
+  before_action :check_for_file, except: :dashboard
   load_and_authorize_resource :class => self.class
 
   # admin dashboard
@@ -7,7 +8,7 @@ class AdminController < ApplicationController
   end
 
   def import_highschools
-    return redirect_to root_path, error: "You don't have any county saved into the DB. Please import first the counties!" unless County.any?
+    return redirect_to root_path, alert: "You don't have any county saved into the DB. Please import first the counties!" unless County.any?
     Resque.enqueue(CsvImporterWorker, params[:file].path, 'import_highschools')
     succes_call
   end
@@ -32,7 +33,12 @@ class AdminController < ApplicationController
   def succes_call
     redirect_to root_path, notice: "File successfully sent to process."
   end
+
   def set_user
     @user = current_user
+  end
+
+  def check_for_file
+    return redirect_to root_path, alert: "Please choose a file" unless params[:file]
   end
 end

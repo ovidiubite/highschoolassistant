@@ -1,4 +1,4 @@
-class NotificationMailer << ActionMailer::Base
+class NotificationMailer < ActionMailer::Base
   default from: 'noreply@highschoolassistant.ro',
          return_path: 'noreply@highschoolassistant.ro'
 
