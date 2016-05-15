@@ -1,0 +1,37 @@
+<h3> Admin Dashboard </h3>
+
+<table class="table">
+    <thead>
+        <tr class="centered-table-header">
+            <th>DB Tabel</th>
+            <th>Data count</th>
+            <th colspan="2">Import Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Highschools</td>
+            <td><%= Highschool.count %></td>
+            <%= form_tag admin_fetch_highschool_data_path, multipart: true do %>
+                <td><%= select_tag :year, options_for_select(Date.new(2001).year..Date.today.year) %></td>
+                <td><%= submit_tag "Fetch data from EDU"%></td>
+            <% end %>
+        </tr>
+        <tr>
+            <td>Evaluation Results</td>
+            <td><%= EvaluationResult.count %></td>
+            <%= form_tag admin_import_evaluation_results_path, multipart: true do %>
+                <td><%= file_field_tag "file" %></td>
+                <td><%= submit_tag "Process csv"%></td>
+            <% end %>
+        </tr>
+        <tr>
+            <td>Admission Results</td>
+            <td><%= AdmissionResult.count %></td>
+            <%= form_tag admin_import_admission_results_path, multipart: true do %>
+                <td><%= file_field_tag "file" %></td>
+                <td><%= submit_tag "Process csv"%></td>
+            <% end %>
+        </tr>
+    </tbody>
+</table>

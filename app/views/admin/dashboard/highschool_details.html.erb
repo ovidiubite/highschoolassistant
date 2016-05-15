@@ -1,0 +1,28 @@
+<h3> Highschool Details </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Section</th>
+            <th>Last Rate</th>
+            <th>Slots</th>
+            <th>Year</th>
+            <th>County</th>
+        </tr>
+    </thead>
+
+    <tbody class="aling-left">
+        <% @highschool.each do |hd| %>
+            <tr>
+                <td><%= hd.highschool.name %> </td>
+                <td><%= hd.section.name %> </td>
+                <td><%= hd.last_rate %> </td>
+                <td><%= hd.students_number %> </td>
+                <td><%= hd.year %> </td>
+                <td><%= hd.highschool.county.name %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<br>
