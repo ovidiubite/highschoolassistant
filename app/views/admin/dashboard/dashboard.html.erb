@@ -24,7 +24,7 @@
             <%= form_tag admin_import_evaluation_results_path, multipart: true do %>
                 <td>
                   <div class="input-control file" data-role="input">
-                      <input type="file">
+                      <%= file_field_tag "file" %>
                   </div>
                 </td>
                 <td><%= submit_tag "Process csv"%></td>
@@ -36,7 +36,7 @@
             <%= form_tag admin_import_admission_results_path, multipart: true do %>
                 <td>
                   <div class="input-control file" data-role="input">
-                      <input type="file">
+                      <%= file_field_tag "file" %>
                   </div>
                 </td>
                 <td><%= submit_tag "Process csv"%></td>
