@@ -10,9 +10,14 @@ Rails.application.routes.draw do
   get 'show/:id', to: 'users#show', as: 'user'
   delete 'destroy/:id', to: 'users#destroy', as: 'destroy_user'
 
-  get 'admin_dashboard',            to: 'admin#dashboard'
-  post 'import_highschools',        to: 'admin#import_highschools'
-  post 'import_counties',           to: 'admin#import_counties'
-  post 'import_admission_results',  to: 'admin#import_admission_results'
-  post 'import_evaluation_results', to: 'admin#import_evaluation_results'
+  namespace :admin do
+    get 'dashboard',                   to: 'dashboard#dashboard'
+    post 'import_highschools',         to: 'dashboard#import_highschools'
+    post 'import_counties',            to: 'dashboard#import_counties'
+    post 'import_admission_results',   to: 'dashboard#import_admission_results'
+    post 'import_evaluation_results',  to: 'dashboard#import_evaluation_results'
+    get 'highschools',                 to: 'dashboard#highschools'
+    get 'highschool_details/:id',      to: 'dashboard#highschool_details', as: 'highschool_details'
+    post 'fetch_highschool_data',      to: 'dashboard#fetch_highschool_data'
+  end
 end

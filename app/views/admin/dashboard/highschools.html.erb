@@ -1,0 +1,18 @@
+<h3> Highschools </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th width="70%">Name</th>
+            <th>County</th>
+        </tr>
+    </thead>
+
+    <tbody class="aling-left">
+        <% @highschools.each do |highschool| %>
+            <tr>
+                <td width="70%"><%= link_to highschool.name, admin_highschool_details_path(highschool.id) %> </td>
+                <td><%= highschool.county.name %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
