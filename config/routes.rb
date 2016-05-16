@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {registrations: 'registrations'}
 
   ResqueWeb::Engine.eager_load!
   mount ResqueWeb::Engine => '/resque_web'
 
-  root 'home#render_dashboard'
+  root 'home#home'
 
   get 'users', to: 'users#index'
   get 'show/:id', to: 'users#show', as: 'user'

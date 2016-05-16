@@ -1,7 +1,7 @@
 class Admin::DashboardController < ApplicationController
   before_action :set_user
   before_action :check_for_file, only: [:import_highschools, :import_counties, :import_admission_results, :import_evaluation_results]
-  # load_and_authorize_resource :class => self.class
+  authorize_resource :class => false
 
   # admin dashboard
   def dashboard
@@ -18,6 +18,7 @@ class Admin::DashboardController < ApplicationController
   end
 
   def fetch_highschool_data
+    return redirect_to root_path, warning: "The data from #{params[:year]} was already processed." if HighschoolDetail.where(year: params[:year]).any?
     Resque.enqueue(HtmlDataFetchWorker, params[:year])
     redirect_to root_path, notice: 'Fetching data from www.admitere.edu.ro in progress.'
   end
