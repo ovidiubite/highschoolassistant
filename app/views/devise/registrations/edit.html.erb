@@ -16,6 +16,17 @@
     <%= f.label :name %><br />
     <%= f.text_field :name, class: "input-control text" %>
   </div>
+
+  <div class="field">
+      <%= f.label :school %><br />
+      <%= f.text_field :school, class: "input-control text" %>
+  </div>
+
+  <div class="field">
+      <%= f.label :county %><br />
+      <%= f.select :county_id, options_from_collection_for_select(County.all, 'id', 'name', f.object.county_id), {}, { class: "input-control select" } %>
+  </div>
+
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off", class: "input-control password" %>
