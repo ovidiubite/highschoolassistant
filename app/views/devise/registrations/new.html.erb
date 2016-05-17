@@ -14,6 +14,16 @@
     </div>
 
     <div class="field">
+        <%= f.label :school %><br />
+        <%= f.text_field :school, class: "input-control text" %>
+    </div>
+
+    <div class="field">
+        <%= f.label :county %><br />
+        <%= f.select :county_id, options_from_collection_for_select(County.all, 'id', 'name', f.object.county_id), {}, { class: "input-control select" } %>
+    </div>
+
+    <div class="field">
         <%= f.label :password %>
         <% if @validatable %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>

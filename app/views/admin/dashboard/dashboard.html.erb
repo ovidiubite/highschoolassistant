@@ -14,7 +14,7 @@
             <td>Highschools</td>
             <td><%= Highschool.count %></td>
             <%= form_tag admin_fetch_highschool_data_path, multipart: true do %>
-                <td><%= select_tag :year, options_for_select(Date.new(2001).year..Date.today.year), class:"input-control select"%></td>
+                <td><%= select_tag :year, options_for_select(Date.new(2004).year..Date.today.year), class:"input-control select"%></td>
                 <td><%= submit_tag "Fetch data"%></td>
             <% end %>
         </tr>

@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: admission_results
+#
+#  id              :integer          not null, primary key
+#  admission_rate  :integer
+#  evaluation_rate :integer
+#  graduation_rate :integer
+#  grade_math      :integer
+#  grade_romana    :integer
+#  grade_native    :integer
+#  assigned_school :string
+#  section         :string
+#  county          :string
+#
+
 class AdmissionResult < ActiveRecord::Base
 
   def self.import_data(row)

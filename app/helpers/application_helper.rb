@@ -6,6 +6,7 @@ module ApplicationHelper
       AB: 'Alba',
       AR: 'Arad',
       AG: 'Arges',
+      B:  'Bucuresti',
       BC: 'Bacau',
       BH: 'Bihor',
       BN: 'Bistrita-Nasaud',
