@@ -1,45 +1,58 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h1>Account Settings</h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+    <%= devise_error_messages! %>
+    <div class="form-group">
+        <div class="centered-form">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, class:"form-control" %>
+        </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, class: "input-control text" %>
-  </div>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+    <% unless f.object.admin? %>
+        <div class="form-group">
+            <div class="centered-form">
+                <%= f.label :name %><br />
+                <%= f.text_field :name, class:"form-control" %>
+            </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, class: "input-control text" %>
-  </div>
+        <div class="form-group">
+            <div class="centered-form">
+                <%= f.label :school %><br />
+                <%= f.text_field :school, class:"form-control" %>
+            </div>
+        </div>
 
-  <div class="field">
-      <%= f.label :school %><br />
-      <%= f.text_field :school, class: "input-control text" %>
-  </div>
+        <div class="form-group">
+            <div class="centered-form">
+                <%= f.label :county %><br />
+                <%= f.select :county_id, options_from_collection_for_select(County.all, 'id', 'name', f.object.county_id), {}, { class:"form-control" } %>
+            </div>
+        </div>
+    <% end %>
 
-  <div class="field">
-      <%= f.label :county %><br />
-      <%= f.select :county_id, options_from_collection_for_select(County.all, 'id', 'name', f.object.county_id), {}, { class: "input-control select" } %>
-  </div>
+    <div class="form-group">
+        <div class="centered-form">
+            <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+            <%= f.password_field :password, autocomplete: "off", class:"form-control" %>
+        </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off", class: "input-control password" %>
-  </div>
+    <div class="form-group">
+        <div class="centered-form">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control" %>
+        </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: "input-control password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+    <div class="form-group">
+        <%= f.submit "Update", class: 'btn btn-primary'%>
+    </div>
 <% end %>
 
 <%= link_to "Back", :back %>

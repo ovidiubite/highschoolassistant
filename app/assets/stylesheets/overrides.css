@@ -1,0 +1,89 @@
+.navbar-custom {
+  background-color: #0072c6;
+  border-color: #024a80;
+}
+.navbar-custom .navbar-brand {
+  color: #ffffff;
+}
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus {
+  color: #ffffff;
+  background-color: #024a80;
+}
+.navbar-custom .navbar-text {
+  color: #ffffff;
+}
+.navbar-custom .navbar-nav > li > a {
+  color: #ffffff;
+}
+.navbar-custom .navbar-nav > li > a:hover,
+.navbar-custom .navbar-nav > li > a:focus {
+  color: #ffffff;
+  background-color: #024a80;
+}
+.navbar-custom .navbar-nav > .active > a,
+.navbar-custom .navbar-nav > .active > a:hover,
+.navbar-custom .navbar-nav > .active > a:focus {
+  color: #024a80;
+  background-color: #024a80;
+}
+.navbar-custom .navbar-nav > .open > a,
+.navbar-custom .navbar-nav > .open > a:hover,
+.navbar-custom .navbar-nav > .open > a:focus {
+  color: #024a80;
+  background-color: #024a80;
+}
+.navbar-custom .navbar-toggle {
+  border-color: #024a80;
+}
+.navbar-custom .navbar-toggle:focus,
+.navbar-custom .navbar-toggle:hover{
+  background-color: #337AB7;
+}
+
+.navbar-custom .navbar-toggle .icon-bar {
+  background-color: #024a80;
+}
+
+.navbar-custom .navbar-collapse,
+.navbar-custom .navbar-form {
+  border-color: #ffffff;
+}
+.navbar-custom .navbar-link {
+  color: #ffffff;
+}
+.navbar-custom .navbar-link:hover {
+  color: #024a80;
+}
+
+@media (max-width: 767px) {
+  .navbar-custom .navbar-nav .open .dropdown-menu > li > a {
+    color: #ffffff;
+  }
+  .navbar-custom .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-custom .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #024a80;
+  }
+  .navbar-custom .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-custom .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-custom .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #024a80;
+    background-color: #024a80;
+  }
+}
+
+.navbar .divider-vertical {
+    height: 50px;
+    border-right: 1px solid #4c9cd7;
+}
+
+.navbar-inverse .divider-vertical {
+    border-right-color: #222222;
+    border-left-color: #111111;
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse .nav > .divider-vertical {
+        display: none;
+     }
+}

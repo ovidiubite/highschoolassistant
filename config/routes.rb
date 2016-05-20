@@ -6,9 +6,15 @@ Rails.application.routes.draw do
 
   root 'home#home'
 
+  # UsersController
   get 'users', to: 'users#index'
   get 'show/:id', to: 'users#show', as: 'user'
   delete 'destroy/:id', to: 'users#destroy', as: 'destroy_user'
+
+  post 'calculate_percentage', to: 'search#calculate_percentage'
+
+  # CountiesController
+  get 'county_highschools', to: 'counties#county_highschools'
 
   namespace :admin do
     get 'dashboard',                   to: 'dashboard#dashboard'
