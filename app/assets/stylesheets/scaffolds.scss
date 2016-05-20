@@ -46,6 +46,7 @@ div {
 .page-content{
   padding-top: 58px;
   text-align: center;
+  height: 100%;
 }
 
 tr.centered-table-header th{
@@ -53,5 +54,11 @@ tr.centered-table-header th{
 }
 
 tbody.aling-left td{
+  text-align: left;
+}
+
+.centered-form{
+  width: 40%;
+  margin: auto;
   text-align: left;
 }

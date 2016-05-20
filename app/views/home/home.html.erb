@@ -1,0 +1,24 @@
+<div class="row search">
+    <div class="col-sm-8 col-sm-offset-2">
+        <%= form_tag calculate_percentage_path, id: 'percentage_form', multipart: true do %>
+        <div class="form-group">
+            <div class="centered-form">
+                <%= text_field_tag :grade, '', placeholder: 'Insert Your Grade', class:"form-control input-sm"%>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="centered-form">
+                <%= select_tag :county_id, options_from_collection_for_select(County.all, 'id', 'name'), prompt: 'County', class:"form-control "%>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="centered-form">
+                <%= select_tag :highschool_id, '', prompt: 'Highschool', disabled: true, class:"form-control "%>
+            </div>
+        </div>
+        <span class="input-group-btn">
+            <button class="btn btn-default btn-sm" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+        </span>
+        <% end %>
+    </div>
+</div>

@@ -16,6 +16,8 @@ gem 'resque'
 gem 'resque-web', require: 'resque_web'
 gem 'toastr-rails'
 gem 'foreman-export-initscript'
+gem 'jquery-turbolinks'
+gem 'will_paginate-bootstrap'
 
 group :development, :test do
   gem 'byebug'
