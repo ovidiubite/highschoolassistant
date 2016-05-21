@@ -87,3 +87,19 @@
         display: none;
      }
 }
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: 300;
+    font-size: 15px;
+    margin-left: 0;
+    width: 100%;
+    text-align: left;
+}
+
+.form-control{
+    width: 100%;
+}

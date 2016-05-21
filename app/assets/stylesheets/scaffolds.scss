@@ -1,9 +1,21 @@
+html {
+    position: relative;
+    min-height: 100%;
+    font-family: 'Open Sans', sans-serif;
+}
+
 body {
   background-color: #4390df !important;
   color: #ffffff;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+}
+
+main {
+    padding-bottom: 20px;
+    width: 100%;
+    margin-top: 54px;
 }
 
 p, ol, ul, td {
@@ -44,9 +56,12 @@ div {
 // custom
 
 .page-content{
-  padding-top: 58px;
+  padding-top: 28px;
   text-align: center;
   height: 100%;
+  margin-bottom: auto;
+  clear: both;
+  max-width: 450px;
 }
 
 tr.centered-table-header th{
@@ -57,8 +72,41 @@ tbody.aling-left td{
   text-align: left;
 }
 
-.centered-form{
-  width: 40%;
-  margin: auto;
-  text-align: left;
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-height: 50px;
+    background-color: transparent;
+    clear: both;
+    margin-bottom: 0;
+}
+
+@media (min-width: 768px){
+  .footer {
+      height: 50px;
+  }
+}
+
+.navbar-center {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+    height: 100%;
+}
+
+body, .navbar.navbar-fixed-top {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    -webkit-backface-visibility: hidden;
+    font-size: 16px;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
 }
