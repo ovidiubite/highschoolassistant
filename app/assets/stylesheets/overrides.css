@@ -1,6 +1,7 @@
 .navbar-custom {
-  background-color: #0072c6;
-  border-color: #024a80;
+  background: rgb(46,59,114); /* Old browsers */
+
+  border-color: rgb(46,59,114);
 }
 .navbar-custom .navbar-brand {
   color: #ffffff;
@@ -33,16 +34,9 @@
   color: #024a80;
   background-color: #024a80;
 }
-.navbar-custom .navbar-toggle {
-  border-color: #024a80;
-}
-.navbar-custom .navbar-toggle:focus,
-.navbar-custom .navbar-toggle:hover{
-  background-color: #337AB7;
-}
 
 .navbar-custom .navbar-toggle .icon-bar {
-  background-color: #024a80;
+  background-color: #ffffff;
 }
 
 .navbar-custom .navbar-collapse,
@@ -51,9 +45,6 @@
 }
 .navbar-custom .navbar-link {
   color: #ffffff;
-}
-.navbar-custom .navbar-link:hover {
-  color: #024a80;
 }
 
 @media (max-width: 767px) {
@@ -86,4 +77,20 @@
     .navbar-collapse .nav > .divider-vertical {
         display: none;
      }
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: 300;
+    font-size: 15px;
+    margin-left: 0;
+    width: 100%;
+    text-align: left;
+}
+
+.form-control{
+    width: 100%;
 }

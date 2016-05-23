@@ -13,8 +13,8 @@
             <td>Highschools</td>
             <td><%= Highschool.count %></td>
             <%= form_tag admin_fetch_highschool_data_path, multipart: true do %>
-                <td><%= select_tag :year, options_for_select(Date.new(2004).year..Date.today.year), class:"input-control select"%></td>
-                <td><%= submit_tag "Fetch data"%></td>
+                <td><%= select_tag :year, options_for_select(Date.new(2004).year..Date.today.year), class:"form-control"%></td>
+                <td><%= submit_tag "Fetch data", class:"btn btn-default"%></td>
             <% end %>
         </tr>
         <tr>
@@ -22,11 +22,11 @@
             <td><%= EvaluationResult.count %></td>
             <%= form_tag admin_import_evaluation_results_path, multipart: true do %>
                 <td>
-                  <div class="input-control file" data-role="input">
-                      <%= file_field_tag "file" %>
-                  </div>
+                  <label class="btn btn-default btn-file">
+                      Select file<%= file_field_tag "file", style:"display:none;" %>
+                  </label>
                 </td>
-                <td><%= submit_tag "Process csv"%></td>
+                <td><%= submit_tag "Process csv", class:"btn btn-default"%></td>
             <% end %>
         </tr>
         <tr>
@@ -34,12 +34,29 @@
             <td><%= AdmissionResult.count %></td>
             <%= form_tag admin_import_admission_results_path, multipart: true do %>
                 <td>
-                  <div class="input-control file" data-role="input">
-                      <%= file_field_tag "file" %>
-                  </div>
+                  <label class="btn btn-default btn-file">
+                      Select file<%= file_field_tag "file", style:"display:none;" %>
+                  </label>
                 </td>
-                <td><%= submit_tag "Process csv"%></td>
+                <td><%= submit_tag "Process csv", class:"btn btn-default" %></td>
             <% end %>
         </tr>
     </tbody>
 </table>
+
+<script>
+$(document).on('change', '.btn-file :file', function() {
+  console.log("bla");
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        console.log(label);
+    input.trigger('fileselect', [numFiles, label]);
+});
+
+$(document).ready( function() {
+    $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+        console.log(this);
+    });
+});
+</script>
