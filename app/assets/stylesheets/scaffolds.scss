@@ -5,7 +5,13 @@ html {
 }
 
 body {
-  background-color: #4390df !important;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2e3b72+0,738bc7+50,738bc7+69,7eaac4+99,7eaac4+100 */
+  background: rgb(46,59,114); /* Old browsers */
+  background: -moz-linear-gradient(-45deg,  rgba(46,59,114,1) 0%, rgba(115,139,199,1) 50%, rgba(115,139,199,1) 69%, rgba(126,170,196,1) 99%, rgba(126,170,196,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg,  rgba(46,59,114,1) 0%,rgba(115,139,199,1) 50%,rgba(115,139,199,1) 69%,rgba(126,170,196,1) 99%,rgba(126,170,196,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg,  rgba(46,59,114,1) 0%,rgba(115,139,199,1) 50%,rgba(115,139,199,1) 69%,rgba(126,170,196,1) 99%,rgba(126,170,196,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2e3b72', endColorstr='#7eaac4',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
   color: #ffffff;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -13,7 +19,7 @@ body {
 }
 
 main {
-    padding-bottom: 20px;
+    padding-bottom: 54px;
     width: 100%;
     margin-top: 54px;
 }
@@ -34,26 +40,11 @@ pre {
   font-size: 11px;
 }
 
-a {
-  color: #fff;
-
-  &:visited {
-    color: #fff;
-  }
-
-  &:hover {
-    color: #656;
-    // background-color: #000;
-  }
-}
-
 div {
   &.field, &.actions {
     margin-bottom: 10px;
   }
 }
-
-// custom
 
 .page-content{
   padding-top: 28px;
@@ -61,7 +52,7 @@ div {
   height: 100%;
   margin-bottom: auto;
   clear: both;
-  max-width: 450px;
+  max-width: 550px;
 }
 
 tr.centered-table-header th{
@@ -74,12 +65,12 @@ tbody.aling-left td{
 
 .footer {
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
+    margin-bottom: 0px;
     width: 100%;
     max-height: 50px;
     background-color: transparent;
-    clear: both;
-    margin-bottom: 0;
+    font-family: 'Varela Round', sans-serif;
 }
 
 @media (min-width: 768px){
@@ -89,6 +80,7 @@ tbody.aling-left td{
 }
 
 .navbar-center {
+    clear: both;
     position: absolute;
     width: 100%;
     left: 0;
@@ -96,6 +88,11 @@ tbody.aling-left td{
     text-align: center;
     margin: auto;
     height: 100%;
+}
+
+.navbar-copyright{
+  margin-top: 5px;
+  font-size: 12px;
 }
 
 body, .navbar.navbar-fixed-top {
@@ -109,4 +106,12 @@ body, .navbar.navbar-fixed-top {
     -moz-background-size: cover !important;
     -o-background-size: cover !important;
     background-size: cover !important;
+}
+
+a, a:hover{
+  color: #E0E4A6;
+}
+
+.navbar-footer-link{
+    color: #fff;
 }
