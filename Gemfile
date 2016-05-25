@@ -18,6 +18,7 @@ gem 'toastr-rails'
 gem 'foreman-export-initscript'
 gem 'jquery-turbolinks'
 gem 'will_paginate-bootstrap'
+gem 'client_side_validations'
 
 group :development, :test do
   gem 'byebug'

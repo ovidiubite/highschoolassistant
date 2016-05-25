@@ -24,12 +24,7 @@ class Admin::DashboardController < ApplicationController
   end
 
   def highschools
-    # @highschools = Highschool.all.order(county_id: 'asc')
-
     @highschools = Highschool.order(county_id: 'asc').paginate(:page => params[:page], :per_page => 20)
-
-    # or, use an explicit "per page" limit:
-
   end
 
   def highschool_details

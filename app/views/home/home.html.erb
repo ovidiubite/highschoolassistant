@@ -1,14 +1,21 @@
+<!-- <img class="main-logo" src="/assets/logo.png"> -->
+<div>
+    <h2>Quick calculate your admission chance!</h2>
+</div>
 <%= form_tag calculate_percentage_path, id: 'percentage_form', multipart: true do %>
     <div class="form-group">
-        <%= text_field_tag :grade, '', placeholder: 'Insert Your Grade', class:"form-control input-sm"%>
-    </div>
-    <div class="form-group">
-        <%= select_tag :county_id, options_from_collection_for_select(County.all, 'id', 'name'), prompt: 'County', class:"form-control "%>
+        <div class="col-sm-4">
+            <%= text_field_tag :grade, '', placeholder: 'Insert Your Grade', class:"form-control"%>
+        </div>
+        <div class="col-sm-6">
+            <%= select_tag :county_id, options_from_collection_for_select(County.all, 'id', 'name'), prompt: 'County', class:"form-control "%>
+        </div>
     </div>
     <div class="form-group">
         <%= select_tag :highschool_id, '', prompt: 'Highschool', disabled: true, class:"form-control "%>
     </div>
     <span class="input-group-btn">
         <button class="btn btn-default btn-sm" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+        <%= link_to "Custom Search", "#" %>
     </span>
 <% end %>
