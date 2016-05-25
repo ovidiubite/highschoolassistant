@@ -57,6 +57,45 @@ class DataFetcher
   	end
   end
 
+  def self.fetch_evaluation_results
+    year = Time.now.year
+    county_number= 0
+    pag_number = 1
+    driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read
+    while 1
+      doc = Nokogiri::HTML(driver)
+
+      county = ApplicationHelper::HASH_COUNTIES[ApplicationHelper::COUNTIES[county_number].to_sym]
+
+      table = doc.css('table.mainTable tr')
+      table.each do |t|
+        next if t.css('td')[0] == nil
+        # logica de inserare in db
+      end
+      pag_number = pag_number + 1
+
+      begin
+        driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read
+        doc = Nokogiri::HTML(driver)
+      rescue OpenURI::HTTPError
+        break if county_number == 41
+        county_number = county_number + 1
+        pag_number = 1
+        begin
+          driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read
+          doc = Nokogiri::HTML(driver)
+        rescue OpenURI::HTTPError
+          break if county_number == 41
+          county_number = county_number + 1
+          pag_number = 1
+          driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read
+          doc = Nokogiri::HTML(driver)
+        end
+      end
+    end
+  end
+
+
   def self.rescue_http_error(county_number, highschool_number, year)
     begin
       driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/lic/#{highschool_number}/").read
