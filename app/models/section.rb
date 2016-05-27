@@ -9,6 +9,6 @@
 #
 
 class Section < ActiveRecord::Base
-  has_many :highschool_detail
+  has_many :highschool_details
   validates_presence_of :name, uniqueness: true
 end

@@ -15,4 +15,9 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require turbolinks
+//= require jquery.inputmask
+//= require jquery.inputmask.extensions
+//= require jquery.inputmask.numeric.extensions
+//= require jquery.inputmask.date.extensions
+//= require chartkick
 //= require_tree .

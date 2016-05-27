@@ -30,4 +30,8 @@ class Result < ActiveRecord::Base
   def float_overall_grade
     self.overall_grade.to_f
   end
+
+  def float_percentage
+    self.percentage.to_f
+  end
 end
