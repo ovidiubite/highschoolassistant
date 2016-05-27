@@ -1,7 +1,6 @@
 class SearchController < ApplicationController
 
   def calculate_percentage
-    ap params
 
     highschool_details = HighschoolDetail.where(section_id: params[:section_id], highschool_id: params[:highschool_id]).first
 
@@ -17,7 +16,5 @@ class SearchController < ApplicationController
       highschool_details_id: highschool_details.id,
       user_id: current_user.present? ? current_user.id : nil
     )
-
   end
-
 end
