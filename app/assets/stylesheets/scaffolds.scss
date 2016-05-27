@@ -116,9 +116,47 @@ a, a:hover{
 .navbar-footer-link{
     color: #fff;
 }
+
 @media (min-width: 768px){
     .col-md-12.padding1{
         padding-left: 25%;
         padding-right: 25%;
     }
+}
+
+label {
+    font-weight: 300;
+    font-size: 15px;
+    margin-left: 0;
+    width: 100%;
+    text-align: left;
+}
+
+.form-control{
+    width: 100%;
+}
+
+.message {
+    color: red;
+}
+
+div.field_with_errors div.ui-effects-wrapper {
+    display: inline-block !important;
+}
+
+.no-padding{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.spacer1{
+    margin-bottom: 15px;
+}
+
+.spacer2{
+    margin-bottom: 5px;
+}
+
+.spacer3{
+    margin-top: 15px;
 }
