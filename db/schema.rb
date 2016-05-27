@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516151717) do
+ActiveRecord::Schema.define(version: 20160527103456) do
 
   create_table "admission_results", force: :cascade do |t|
     t.integer "admission_rate"
@@ -33,13 +33,16 @@ ActiveRecord::Schema.define(version: 20160516151717) do
   end
 
   create_table "evaluation_results", force: :cascade do |t|
-    t.string  "county"
-    t.integer "evaluation_rate"
+    t.string  "evaluation_rate"
     t.integer "grade_math"
     t.integer "grade_romana"
     t.integer "grade_native"
     t.string  "school"
+    t.integer "county_id"
+    t.integer "year"
   end
+
+  add_index "evaluation_results", ["county_id"], name: "index_evaluation_results_on_county_id"
 
   create_table "highschool_details", force: :cascade do |t|
     t.integer  "students_number"
@@ -62,6 +65,21 @@ ActiveRecord::Schema.define(version: 20160516151717) do
   end
 
   add_index "highschools", ["county_id"], name: "index_highschools_on_county_id"
+
+  create_table "results", force: :cascade do |t|
+    t.string   "percentage"
+    t.string   "overall_grade"
+    t.string   "evaluation_rate"
+    t.string   "graduation_rate"
+    t.date     "date"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "highschool_details_id"
+    t.integer  "user_id"
+  end
+
+  add_index "results", ["highschool_details_id"], name: "index_results_on_highschool_details_id"
+  add_index "results", ["user_id"], name: "index_results_on_user_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

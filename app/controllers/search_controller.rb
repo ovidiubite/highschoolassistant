@@ -4,7 +4,4 @@ class SearchController < ApplicationController
     ap params
   end
 
-  # end
-  # def percentage_results
-
 end

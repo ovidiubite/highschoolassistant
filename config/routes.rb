@@ -25,5 +25,6 @@ Rails.application.routes.draw do
     get 'highschools',                 to: 'dashboard#highschools'
     get 'highschool_details/:id',      to: 'dashboard#highschool_details', as: 'highschool_details'
     post 'fetch_highschool_data',      to: 'dashboard#fetch_highschool_data'
+    post 'fetch_evaluation_results',   to: 'dashboard#fetch_evaluation_results'
   end
 end

@@ -15,4 +15,9 @@
 class HighschoolDetail < ActiveRecord::Base
   belongs_to :highschool
   belongs_to :section
+  has_many :results
+
+  def float_last_rate
+    self.last_rate.to_f
+  end
 end

@@ -20,10 +20,18 @@
         <tr>
             <td>Evaluation Results</td>
             <td><%= EvaluationResult.count %></td>
+            <%= form_tag admin_fetch_evaluation_results_path, multipart: true do %>
+                <td><%= select_tag :year, options_for_select(Time.now.year-1..Time.now.year), class:"form-control"%></td>
+                <td><%= submit_tag "Fetch data", class:"btn btn-default"%></td>
+            <% end %>
+        </tr>
+        <tr>
+            <td>Evaluation Results</td>
+            <td><%= EvaluationResult.count %></td>
             <%= form_tag admin_import_evaluation_results_path, multipart: true do %>
                 <td>
                   <label class="btn btn-default btn-file">
-                      Select file<%= file_field_tag "file", style:"display:none;" %>
+                      File<%= file_field_tag "file", style:"display:none;" %>
                   </label>
                 </td>
                 <td><%= submit_tag "Process csv", class:"btn btn-default"%></td>
@@ -35,7 +43,7 @@
             <%= form_tag admin_import_admission_results_path, multipart: true do %>
                 <td>
                   <label class="btn btn-default btn-file">
-                      Select file<%= file_field_tag "file", style:"display:none;" %>
+                      File<%= file_field_tag "file", style:"display:none;" %>
                   </label>
                 </td>
                 <td><%= submit_tag "Process csv", class:"btn btn-default" %></td>
