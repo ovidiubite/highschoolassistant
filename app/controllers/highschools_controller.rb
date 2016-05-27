@@ -6,7 +6,7 @@ class HighschoolsController < ApplicationController
   end
 
   def highschool_sections
-    sections = Section.joins(:highschool_details).select(:name, :id).where("highschool_details.highschool_id = (?) AND highschool_details.year = (?)", params[:highschool_id], 2015)
+    sections = Section.joins(:highschool_details).select(:name, :id).where("highschool_details.highschool_id = (?) AND highschool_details.year = (?)", params[:highschool_id], Time.now.year-1)
     render json: { sections: sections }
   end
 end
