@@ -27,4 +27,16 @@ class AdmissionResult < ActiveRecord::Base
             section: row['Section'],
             county: row['County'])
   end
+
+  def float_evaluation_rate
+    self.evaluation_rate.to_f
+  end
+
+  def float_graduation_rate
+    self.graduation_rate.to_f
+  end
+
+  def float_admission_rate
+    self.overall_grade.to_f
+  end
 end

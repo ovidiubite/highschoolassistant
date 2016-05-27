@@ -29,9 +29,36 @@ var main = function(){
                }
             });
         })
-    }
+    };
 
+    var getSections = function(){
+      $('#highschool_id').on('change', function(){
+          var highschoolId = $('#highschool_id option:selected').val();
+          $.ajax ({
+             type: 'get',
+             url: '/highschool_sections',
+             data: { highschool_id: highschoolId },
+             success: function(data) {
+                var sections = $('#section_id');
+                if (data.sections.length == 0){
+                    sections.empty();
+                    sections.prop('disabled', true);
+                    sections.append(new Option('Section', ''))
+                }else{
+                    sections.empty();
+                    sections.prop('disabled', false);
+                }
+
+                for (var x = 0; x < data.sections.length; x++) {
+                    sections.append(new Option(data.sections[x].name, data.sections[x].id));
+                }
+
+             }
+          });
+      })
+    };
     getHighschools();
+    getSections();
 }
 
 $(function() {

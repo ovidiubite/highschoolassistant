@@ -19,6 +19,8 @@ gem 'foreman-export-initscript'
 gem 'jquery-turbolinks'
 gem 'will_paginate-bootstrap'
 gem 'client_side_validations'
+gem 'jquery-inputmask-rails'
+gem "chartkick"
 
 group :development, :test do
   gem 'byebug'

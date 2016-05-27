@@ -14,7 +14,7 @@ class DataFetcher
 
   		county = ApplicationHelper::HASH_COUNTIES[ApplicationHelper::COUNTIES[county_number].to_sym]
 
-      highschool_name = doc.css("center font.heading2 i").text
+      highschool_name = doc.css("center font.heading2 i").text.strip
 
       table = doc.css('table.mainTable tr')
   		table.each do |t|
@@ -22,13 +22,13 @@ class DataFetcher
         highschool = Highschool.find_or_create_by(name: highschool_name,
                            county: County.find_or_create_by(name: county))
 
-        section = Section.find_or_create_by(name: t.css('td')[3].text)
+        section = Section.find_or_create_by(name: t.css('td')[3].text.strip)
 
         HighschoolDetail.create(year: year,
-                                students_number: t.css('td')[5].text,
+                                students_number: t.css('td')[5].text.strip,
                                 section_id: section.id,
                                 highschool_id: highschool.id,
-                                last_rate: t.css('td')[11].text)
+                                last_rate: t.css('td')[11].text.strip)
 
       end
       highschool_number = highschool_number + 1
@@ -57,11 +57,14 @@ class DataFetcher
   	end
   end
 
-  def self.fetch_evaluation_results
-    year = Time.now.year
+  def self.fetch_evaluation_results(year = (Time.now - 1.year).year)
     county_number= 0
     pag_number = 1
-    driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read
+    begin
+      driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read
+    rescue OpenURI::HTTPError
+      return ""
+    end
     while 1
       doc = Nokogiri::HTML(driver)
 
@@ -69,8 +72,16 @@ class DataFetcher
 
       table = doc.css('table.mainTable tr')
       table.each do |t|
-        next if t.css('td')[0] == nil
-        # logica de inserare in db
+        next if t.css('td')[0].text.strip == 'Index' || t.css('td')[0].text.strip == 'Notă'
+        next if t.css('td')[14].text.strip == '-'
+
+        #  grade_math      :integer
+        #  grade_romana    :integer
+        #  grade_native    :integer
+        EvaluationResult.create(county_id: County.find_or_create_by(name: county).id,
+                                school: t.css('td')[3].text.strip,
+                                evaluation_rate: t.css('td')[14].text.strip,
+                                year: year)
       end
       pag_number = pag_number + 1
 

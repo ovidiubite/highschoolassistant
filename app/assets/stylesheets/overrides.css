@@ -96,9 +96,22 @@ label {
 }
 
 .message {
-  color: red;
+    color: red;
 }
 
 div.field_with_errors div.ui-effects-wrapper {
-  display: inline-block !important;
+    display: inline-block !important;
+}
+
+.no-padding{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.spacer1{
+    margin-bottom: 15px;
+}
+
+.spacer2{
+    margin-bottom: 5px;
 }

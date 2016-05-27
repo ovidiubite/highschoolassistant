@@ -18,9 +18,15 @@ class Admin::DashboardController < ApplicationController
   end
 
   def fetch_highschool_data
-    return redirect_to root_path, warning: "The data from #{params[:year]} was already processed." if HighschoolDetail.where(year: params[:year]).any?
-    Resque.enqueue(HtmlDataFetchWorker, params[:year])
+    return redirect_to root_path, alert: "The data from #{params[:year]} was already processed." if HighschoolDetail.where(year: params[:year]).any?
+    Resque.enqueue(HtmlDataFetchWorker, 'fetch_highschools', params[:year])
     redirect_to root_path, notice: 'Fetching data from www.admitere.edu.ro in progress.'
+  end
+
+  def fetch_evaluation_results
+    return redirect_to root_path, alert: "The data from #{params[:year]} was already processed." if EvaluationResult.where(year: params[:year]).any?
+    Resque.enqueue(HtmlDataFetchWorker, 'fetch_evaluation_results', params[:year])
+    redirect_to root_path, notice: 'Fetching data from www.evaluare.edu.ro in progress.'
   end
 
   def highschools

@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   post 'calculate_percentage', to: 'search#calculate_percentage'
 
   # CountiesController
-  get 'county_highschools', to: 'counties#county_highschools'
+  get 'county_highschools', to: 'highschools#county_highschools'
+
+  get 'highschool_sections', to: 'highschools#highschool_sections'
 
   namespace :admin do
     get 'dashboard',                   to: 'dashboard#dashboard'
@@ -25,5 +27,6 @@ Rails.application.routes.draw do
     get 'highschools',                 to: 'dashboard#highschools'
     get 'highschool_details/:id',      to: 'dashboard#highschool_details', as: 'highschool_details'
     post 'fetch_highschool_data',      to: 'dashboard#fetch_highschool_data'
+    post 'fetch_evaluation_results',   to: 'dashboard#fetch_evaluation_results'
   end
 end
