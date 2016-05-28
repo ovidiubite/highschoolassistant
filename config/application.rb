@@ -26,5 +26,6 @@ module Highschoolassistant
 
     config.autoload_paths += Dir["#{config.root}/app/workers/**/"]
     config.autoload_paths += Dir["#{config.root}/app/services/**/"]
+    config.autoload_paths += Dir["#{config.root}/lib/active_record/**/"]
   end
 end
