@@ -10,7 +10,7 @@ class CreateResults < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_reference :results, :highschool_details, index: true, foreign_key: true
+    add_reference :results, :highschool_detail, index: true, foreign_key: true
     add_reference :results, :user, index: true, foreign_key: true
   end
 end

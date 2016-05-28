@@ -19,5 +19,6 @@
 //= require jquery.inputmask.extensions
 //= require jquery.inputmask.numeric.extensions
 //= require jquery.inputmask.date.extensions
-//= require chartkick
+//= require c3
+//= require d3
 //= require_tree .

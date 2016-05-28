@@ -1,2 +1,0 @@
-
-<%= pie_chart Result.where(highschool_details_id: Result.last.highschool_details_id).group(:highschool_details_id).map(&:percentage) %>

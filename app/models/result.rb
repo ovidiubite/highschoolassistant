@@ -17,7 +17,7 @@
 class Result < ActiveRecord::Base
 
   belongs_to :user
-  belongs_to :highschool_details
+  belongs_to :highschool_detail
 
   def float_evaluation_rate
     self.evaluation_rate.to_f

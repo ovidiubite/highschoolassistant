@@ -72,13 +72,13 @@ ActiveRecord::Schema.define(version: 20160527103456) do
     t.string   "evaluation_rate"
     t.string   "graduation_rate"
     t.date     "date"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "highschool_details_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "highschool_detail_id"
     t.integer  "user_id"
   end
 
-  add_index "results", ["highschool_details_id"], name: "index_results_on_highschool_details_id"
+  add_index "results", ["highschool_detail_id"], name: "index_results_on_highschool_detail_id"
   add_index "results", ["user_id"], name: "index_results_on_user_id"
 
   create_table "roles", force: :cascade do |t|
