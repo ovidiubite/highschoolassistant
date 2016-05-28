@@ -1,5 +1,4 @@
 include ApplicationHelper
-include "../lib/active_record/add_reset_pk_sequence_to_base.rb"
 Role.delete_all
 User.delete_all
 County.delete_all
