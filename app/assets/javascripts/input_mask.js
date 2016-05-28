@@ -1,3 +1,4 @@
 $(document).ready(function(){
-  // $("#evaluation_rate").inputmask('Regex', { regex: "^[1-9][0-9]?$|^100$" });  //static mask
+  $("#evaluation_rate").inputmask("9.99");  //static mask
+  $("#overall_grade").inputmask("9.99");  //static mask
 });

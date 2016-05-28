@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   delete 'destroy/:id', to: 'users#destroy', as: 'destroy_user'
 
   post 'calculate_percentage', to: 'search#calculate_percentage'
+  get 'show_result', to: 'search#show_result'
 
   # CountiesController
   get 'county_highschools', to: 'highschools#county_highschools'

@@ -20,7 +20,8 @@ gem 'jquery-turbolinks'
 gem 'will_paginate-bootstrap'
 gem 'client_side_validations'
 gem 'jquery-inputmask-rails'
-gem "chartkick"
+gem 'c3-rails'
+gem "d3-rails"
 
 group :development, :test do
   gem 'byebug'

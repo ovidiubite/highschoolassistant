@@ -7,14 +7,21 @@ class SearchController < ApplicationController
     # dummy data
     percentage = '68.64'
 
-    Result.create(
+    result = Result.create(
       overall_grade: params[:overall_grade],
       evaluation_rate: params[:evaluation_rate],
       graduation_rate: params[:graduation_rate],
       date: Date.today,
       percentage: percentage,
-      highschool_details_id: highschool_details.id,
+      highschool_detail_id: highschool_details.id,
       user_id: current_user.present? ? current_user.id : nil
     )
+
+    redirect_to show_result_path(result: result, highschool_detail: highschool_details)
+  end
+
+  def show_result
+    @result = Result.find(params[:result])
+    @highschool_detail = HighschoolDetail.find(params[:highschool_detail])
   end
 end

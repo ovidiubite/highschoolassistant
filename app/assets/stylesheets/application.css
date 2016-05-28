@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require toastr
+ *= require c3
  *= require_self
  *= require_tree .
  */
