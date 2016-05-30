@@ -1,4 +1,5 @@
 class HighschoolsController < ApplicationController
+  load_and_authorize_resource
 
   def county_highschools
     highschools = Highschool.joins(:county).select(:id, :name).where(county_id: params[:county_id])

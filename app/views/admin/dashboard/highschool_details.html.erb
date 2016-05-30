@@ -1,5 +1,5 @@
-<h3 class="spacer1"><%= @highschool.first.highschool.name %></h3>
-<table data-role="table" class="ui-responsive table spacer3">
+<h3 class="spacer1"><%= @highschool.first.highschool.name %></h3><br/>
+<table data-role="table" class="table spacer3" id="admin_highschool_details">
     <thead>
         <tr>
             <th>Section</th>
@@ -10,7 +10,7 @@
         </tr>
     </thead>
 
-    <tbody class="aling-left">
+    <tbody>
         <% @highschool.each do |hd| %>
         <tr>
             <td><%= hd.section.name %> </td>
@@ -24,3 +24,19 @@
 </table>
 
 <br>
+
+<script>
+    $(document).ready(function(){
+        if ( $.fn.dataTable.isDataTable( '#admin_highschool_details' ) ) {
+            table = $('#admin_highschool_details').DataTable();
+        }
+        else {
+            table = $('#admin_highschool_details').DataTable( {
+              responsive: true,
+              paging: false,
+              searching: false,
+              info: false
+            } );
+        }
+    });
+</script>

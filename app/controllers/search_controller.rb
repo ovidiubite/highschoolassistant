@@ -5,7 +5,7 @@ class SearchController < ApplicationController
     highschool_details = HighschoolDetail.where(section_id: params[:section_id], highschool_id: params[:highschool_id]).first
 
     # dummy data
-    percentage = '68.64'
+    percentage = rand(0..100).to_s
 
     result = Result.create(
       overall_grade: params[:overall_grade],
@@ -14,8 +14,8 @@ class SearchController < ApplicationController
       date: Date.today,
       percentage: percentage,
       highschool_detail_id: highschool_details.id,
-      user_id: current_user.present? ? current_user.id : nil
     )
+    current_user.results << result if current_user
 
     redirect_to show_result_path(result: result, highschool_detail: highschool_details)
   end

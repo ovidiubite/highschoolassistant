@@ -8,7 +8,8 @@ class Ability
       else
         if user && user.user?
           can :manage, :all
-          cannot [:destroy, :create, :new, :index], User
+          cannot :manage, User
+          can [:results_history, :edit, :update], User, :id => user.id
         else
           can :read, :all
           cannot :manage, User

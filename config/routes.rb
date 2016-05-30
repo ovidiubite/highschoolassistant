@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {registrations: 'registrations'}
+  devise_for :users, controllers: {registrations: 'registrations', sessions: 'sessions'}
 
   ResqueWeb::Engine.eager_load!
   mount ResqueWeb::Engine => '/resque_web'
@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   # UsersController
   get 'users', to: 'users#index'
+  get ':id/results_history', to: 'users#results_history', as: 'results_history'
   get 'show/:id', to: 'users#show', as: 'user'
   delete 'destroy/:id', to: 'users#destroy', as: 'destroy_user'
 

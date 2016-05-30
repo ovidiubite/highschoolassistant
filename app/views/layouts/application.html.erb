@@ -9,6 +9,9 @@
 
         <%= stylesheet_link_tag "application", :media => "all" %>
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css", rel="stylesheet">
+        <link href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css", rel="stylesheet">
+
 
         <!-- For third-generation iPad with high-resolution Retina display: -->
         <!-- Size should be 144 x 144 pixels -->
@@ -30,8 +33,12 @@
         <!-- Size should be 32 x 32 pixels -->
         <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
-        <%= javascript_include_tag "https://www.google.com/jsapi" %>
+        <%= javascript_include_tag "//www.google.com/jsapi" %>
         <%= javascript_include_tag "application" %>
+        <%= javascript_include_tag "https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" %>
+        <%= javascript_include_tag "https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" %>
+        <%= javascript_include_tag "https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js" %>
+        <%= javascript_include_tag "https://cdn.datatables.net/responsive/2.1.0/js/responsive.bootstrap.min.js" %>
     </head>
 
     <body>

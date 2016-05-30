@@ -14,21 +14,21 @@
             <%= text_field_tag :overall_grade, '', placeholder: 'Overall Grade', class:"form-control"%>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 spacer1">
-              <%= label :county_id, "Choose your county", class:"spacer1" %>
-              <%= select_tag :county_id, options_from_collection_for_select(County.all, 'id', 'name'), prompt: 'County', class:"form-control "%>
+            <%= label :county_id, "Choose your county", class:"spacer1" %>
+            <%= select_tag :county_id, options_from_collection_for_select(County.all, 'id', 'name'), prompt: 'County', class:"form-control "%>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 spacer1">
             <%= label :county_id, "Select your Highschool", class:"spacer1"  %>
             <%= select_tag :highschool_id, '', prompt: 'Highschool', disabled: true, class:"form-control "%>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 spacer2 padding1">
+        <div class="col-xs-12 col-sm-12 col-md-12 spacer2">
             <%= label :section_id, "Select your section" %>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 spacer1 padding1">
+        <div class="col-xs-12 col-sm-12 col-md-12 spacer1">
             <%= select_tag :section_id, '', prompt: 'Section', disabled: true, class:"form-control "%>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 spacer3">
-            <button class="btn btn-primary" type="submit">Show results</button>
+            <button class="btn btn-primary wide-btn" type="submit">Show results</button>
         </div>
     </div>
 <% end %>

@@ -52,7 +52,7 @@ div {
   height: 100%;
   margin-bottom: auto;
   clear: both;
-  max-width: 1024px;
+  max-width: 786px;
 
 }
 
@@ -159,4 +159,12 @@ div.field_with_errors div.ui-effects-wrapper {
 
 .spacer3{
     margin-top: 15px;
+}
+
+.wide-btn{
+   width: 70%;
+}
+
+.normal-btn{
+  width: 40%;
 }
