@@ -13,6 +13,7 @@ class Ability
         else
           can :read, :all
           cannot :manage, User
+          can [:highschool_sections, :county_highschools], [County, Highschool, Result]
         end
     end
   end
