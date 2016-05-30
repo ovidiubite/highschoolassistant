@@ -1,5 +1,6 @@
-<h2>Sign up</h2>
-
+<h3>Sign up</h3>
+<div>Create your log in information</div>
+<div> (all fields required)</div>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true) do |f| %>
     <div class="row">
         <%= hidden_field :result, :id, :value => params[:result] if params[:result] %>
@@ -9,24 +10,6 @@
         <div class="col-xs-12 col-sm-12 col-md-12 spacer2">
               <%= f.email_field :email, autofocus: true, class:"form-control"%>
         </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12 spacer2 spacer3">
-            <label>Name</label>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 spacer2">
-            <%= f.text_field :name, class:"form-control" %>
-        </div>
-
-        <div class="col-xs-12 col-sm-6 col-md-6 spacer2 spacer3">
-            <label>School</label>
-            <%= f.text_field :school, class:"form-control" %>
-        </div>
-
-        <div class="col-xs-12 col-sm-6 col-md-6 spacer2 spacer3">
-            <label>County</label>
-            <%= f.select :county_id, options_from_collection_for_select(County.all, 'id', 'name', f.object.county_id), {}, class:"form-control" %>
-        </div>
-
         <div class="col-xs-12 col-sm-12 col-md-12 spacer2 spacer3">
             <label>Password</label>
         </div>
@@ -42,7 +25,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12 spacer2 spacer3">
-            <%= f.submit "Sign up", class: 'btn btn-primary wide-btn' %>
+            <%= f.submit "Sign up", class: 'btn wide-btn form-control' %>
         </div>
     </div>
 <% end %>

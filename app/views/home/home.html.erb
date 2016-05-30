@@ -1,34 +1,16 @@
 <!-- <img class="main-logo" src="/assets/logo.png"> -->
 <div>
-    <h3>Quick calculate your admission chance!</h2>
+    <% if current_user %>
+        <h4 class='spacer4'>Welcome back <%= current_user.email %> </h4>
+        <div class='spacer4'> Give it a try and find more options </div>
+        <%= link_to 'New search', new_search_path, class:'btn wide-btn spacer4 form-control' %>
+        <h4 class='spacer4 spacer2'> Or maybe you want to see your older queries </h4>
+        <%= link_to 'See your history', results_history_path(current_user.id), class:'btn wide-btn spacer4 form-control' %>
+    <% else %>
+        <div class='spacer4 spacer2'> Don't worry anymore and find out your admission chance </div>
+        <%= link_to 'Create an account', new_user_registration_path, class:'btn wide-btn spacer4 form-control' %>
+        <p> and save your searches </p>
+        <%= link_to 'See your chance', new_search_path, class:'btn wide-btn spacer4 form-control' %>
+        <p> no account needed </p>
+    <% end %>
 </div><br/>
-<%= form_tag calculate_percentage_path, id: 'percentage_form', multipart: true do %>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 spacer2">
-            <%= label :evaluation_rate, "Insert Your Grades" %>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6 spacer1">
-            <%= text_field_tag :evaluation_rate, '', placeholder: 'National Evaluation', class:"form-control"%>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6 spacer1">
-            <%= text_field_tag :overall_grade, '', placeholder: 'Overall Grade', class:"form-control"%>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 spacer1">
-            <%= label :county_id, "Choose your county", class:"spacer1" %>
-            <%= select_tag :county_id, options_from_collection_for_select(County.all, 'id', 'name'), prompt: 'County', class:"form-control "%>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 spacer1">
-            <%= label :county_id, "Select your Highschool", class:"spacer1"  %>
-            <%= select_tag :highschool_id, '', prompt: 'Highschool', disabled: true, class:"form-control "%>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 spacer2">
-            <%= label :section_id, "Select your section" %>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 spacer1">
-            <%= select_tag :section_id, '', prompt: 'Section', disabled: true, class:"form-control "%>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 spacer3">
-            <button class="btn btn-primary wide-btn" type="submit">Show results</button>
-        </div>
-    </div>
-<% end %>

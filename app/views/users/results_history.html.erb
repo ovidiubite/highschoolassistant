@@ -1,40 +1,48 @@
 <h3 class="spacer1">My search history</h3>
-<table data-role="table" class="table spacer3" id="history_table">
-    <thead>
-        <tr>
-            <th>Highschool</th>
-            <th>Section</th>
-            <th>County</th>
-            <th>Overall Grade</th>
-            <th>Evaluation Rate</th>
-            <th>Admission chance</th>
-        </tr>
-    </thead>
+<% if user.results.any? %>
+    <table data-role="table" class="table spacer3" id="history_table">
+        <thead>
+            <tr>
+                <th>Highschool</th>
+                <th>Section</th>
+                <th>County</th>
+                <th>Overall Grade</th>
+                <th>Evaluation Rate</th>
+                <th>Admission chance</th>
+            </tr>
+        </thead>
 
-    <tbody>
-        <% @results.each do |result| %>
-        <tr>
-            <td><%= result.highschool_detail.highschool.name %> </td>
-            <td><%= result.highschool_detail.section.name %> </td>
-            <td><%= result.highschool_detail.highschool.county.name %> </td>
-            <td><%= result.overall_grade   %> </td>
-            <td><%= result.evaluation_rate %> </td>
-            <td><%= result.percentage %>% </td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
-<br>
+        <tbody>
+            <% @results.each do |result| %>
+            <tr>
+                <td><%= result.highschool_detail.highschool.name %> </td>
+                <td><%= result.highschool_detail.section.name %> </td>
+                <td><%= result.highschool_detail.highschool.county.name %> </td>
+                <td><%= result.overall_grade   %> </td>
+                <td><%= result.evaluation_rate %> </td>
+                <td><%= result.percentage %>% </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <br>
 
-<script>
-    $(document).ready(function(){
-        if ( $.fn.dataTable.isDataTable( '#history_table' ) ) {
-            table = $('#history_table').DataTable();
-        }
-        else {
-            table = $('#history_table').DataTable( {
-              responsive: true
-            } );
-        }
-    });
-</script>
+    <script>
+        $(document).ready(function(){
+            if ( $.fn.dataTable.isDataTable( '#history_table' ) ) {
+                table = $('#history_table').DataTable();
+            }
+            else {
+                table = $('#history_table').DataTable( {
+                  responsive: true
+                } );
+            }
+        });
+    </script>
+
+<% else %>
+    <p class="spacer3 spacer1">
+        You don't have any results.
+    </p>
+    <%= link_to 'Check your admission chance', root_path, class:"btn btn-primary btn-wide spacer1"%>
+<% end %>

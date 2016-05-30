@@ -13,33 +13,34 @@
         <%= link_to "Log in", new_user_session_path(result: @result), class:"btn btn-default normal-btn"%>
     </div>
 <% end %>
-<script>
-$(document).on('ready', function(){
-    var chart = c3.generate({
-        data: {
-            columns: [
-                ['Percentage', 0]
-            ],
-            type: 'gauge',
-            onclick: function (d, i) { console.log("onclick", d, i); },
-            onmouseover: function (d, i) { console.log("onmouseover", d, i); },
-            onmouseout: function (d, i) { console.log("onmouseout", d, i); }
-            },
-        color: {
-            pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
-            threshold: {
-                values: [30, 60, 90, 100]
-            }
-        },
-        size: {
-            height: 180
-        }
-    });
 
-    setTimeout(function () {
-        chart.load({
-            columns: [['Percentage', <%= @result.percentage.to_f %>]]
+<script>
+    $(document).on('ready', function(){
+        var chart = c3.generate({
+            data: {
+                columns: [
+                    ['Percentage', 0]
+                ],
+                type: 'gauge',
+                onclick: function (d, i) { console.log("onclick", d, i); },
+                onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+                onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+                },
+            color: {
+                pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
+                threshold: {
+                    values: [30, 60, 90, 100]
+                }
+            },
+            size: {
+                height: 180
+            }
         });
-    }, 1000);
-})
+
+        setTimeout(function () {
+            chart.load({
+                columns: [['Percentage', <%= @result.percentage.to_f %>]]
+            });
+        }, 1000);
+    })
 </script>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   post 'calculate_percentage', to: 'search#calculate_percentage'
   get 'show_result', to: 'search#show_result'
+  get 'new', to: 'search#new', as: 'new_search'
 
   # CountiesController
   get 'county_highschools', to: 'highschools#county_highschools'

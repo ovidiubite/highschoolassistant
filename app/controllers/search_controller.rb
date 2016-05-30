@@ -1,5 +1,8 @@
 class SearchController < ApplicationController
 
+  def new
+  end
+
   def calculate_percentage
 
     highschool_details = HighschoolDetail.where(section_id: params[:section_id], highschool_id: params[:highschool_id]).first

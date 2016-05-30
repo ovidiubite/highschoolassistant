@@ -34,4 +34,8 @@ class Result < ActiveRecord::Base
   def float_percentage
     self.percentage.to_f
   end
+
+  def self.calculate_percentage
+    
+  end
 end
