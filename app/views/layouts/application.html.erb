@@ -49,15 +49,6 @@
             </div>
             <%= render 'layouts/notifications' %>
         </main>
-        <footer class="navbar footer" style="display: block;">
-            <div class="container">
-                <div class="navbar-center">
-                    <a class="navbar-footer-link" href="/users/sign_in">Log In</a> |
-                    <a class="navbar-footer-link" href="/support">Support</a> |
-                    <a class="navbar-footer-link" href="<%= new_user_registration_path unless current_user %>">Sign Up</a>
-                    <div class="navbar-copyright"><span>© <%= Time.now.year %> Highschool Assistant</span></div>
-                </div>
-            </div>
-        </footer>
+        <%= render 'layouts/footer' %>
     </body>
 </html>

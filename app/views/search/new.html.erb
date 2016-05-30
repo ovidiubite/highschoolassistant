@@ -1,0 +1,33 @@
+<!-- <img class="main-logo" src="/assets/logo.png"> -->
+<div>
+    <h3>Quick calculate your admission chance!</h3>
+</div><br/>
+<%= form_tag calculate_percentage_path, id: 'percentage_form', multipart: true do %>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 spacer1">
+            <%= label :evaluation_rate, "Evaluation Grade (required)", class:"spacer1"  %>
+            <%= text_field_tag :evaluation_rate, '', class:"form-control"%>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 spacer1">
+            <%= label :overall_grade, "Overall Grade (required)", class:"spacer1" %>
+            <%= text_field_tag :overall_grade, '', class:"form-control"%>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 spacer1">
+            <%= label :county_id, "Choose your county (required)", class:"spacer1" %>
+            <%= select_tag :county_id, options_from_collection_for_select(County.all, 'id', 'name'), prompt: '---', class:"form-control "%>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 spacer1">
+            <%= label :county_id, "Select your Highschool (required)", class:"spacer1"  %>
+            <%= select_tag :highschool_id, '', prompt: '---', disabled: true, class:"form-control "%>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 spacer2">
+            <%= label :section_id, "Select your section (required)" %>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 spacer1">
+            <%= select_tag :section_id, '', prompt: '---', disabled: true, class:"form-control "%>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 spacer3">
+            <button class="btn wide-btn form-control" type="submit">Show results</button>
+        </div>
+    </div>
+<% end %>
