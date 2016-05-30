@@ -1,5 +1,5 @@
-<h3> Highschools </h3>
-<table data-role="table" class=" table ui-responsive">
+<h3 class="spacer1"> Highschools </h3><br/>
+<table data-role="table" class="table" id="admin_highschools">
     <thead>
         <tr>
             <th width="80%">Name</th>
@@ -7,7 +7,7 @@
         </tr>
     </thead>
 
-    <tbody class="aling-left">
+    <tbody>
         <% @highschools.each do |highschool| %>
             <tr>
                 <td width="80%"><%= link_to highschool.name, admin_highschool_details_path(highschool.id) %> </td>
@@ -16,4 +16,17 @@
         <% end %>
     </tbody>
 </table>
-<%= will_paginate @highschools, renderer: BootstrapPagination::Rails %>
+
+<script>
+    $(document).ready(function(){
+        if ( $.fn.dataTable.isDataTable( '#admin_highschools' ) ) {
+            table = $('#admin_highschools').DataTable();
+        }
+        else {
+            table = $('#admin_highschools').DataTable( {
+              responsive: true
+            } );
+        }
+    });
+
+</script>

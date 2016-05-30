@@ -7,6 +7,10 @@ class Admin::DashboardController < ApplicationController
   def dashboard
   end
 
+  def users_index
+    @users = User.all
+  end
+
   def import_admission_results
     Resque.enqueue(CsvImporterWorker, params[:file].path, 'import_admission_results')
     succes_call
@@ -30,7 +34,7 @@ class Admin::DashboardController < ApplicationController
   end
 
   def highschools
-    @highschools = Highschool.order(county_id: 'asc').paginate(:page => params[:page], :per_page => 20)
+    @highschools = Highschool.all
   end
 
   def highschool_details

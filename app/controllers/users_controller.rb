@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :destroy]
+  before_action :set_user, only: [:show, :destroy, :results_history]
   load_and_authorize_resource
-  def index
-    @users = User.all
-  end
 
   def show
+  end
+
+  def results_history
+    @results = @user.results
   end
 
   # DELETE /users/1

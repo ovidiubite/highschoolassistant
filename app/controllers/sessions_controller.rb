@@ -1,11 +1,5 @@
-class RegistrationsController < Devise::RegistrationsController
+class SessionsController < Devise::SessionsController
   after_filter :check_for_result, only: :create
-
-  protected
-
-  def update_resource(resource, params)
-    resource.update_without_password(params)
-  end
 
   private
 
