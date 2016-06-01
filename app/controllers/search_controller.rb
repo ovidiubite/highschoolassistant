@@ -16,7 +16,7 @@ class SearchController < ApplicationController
       graduation_rate: params[:graduation_rate],
       date: Date.today,
       percentage: percentage,
-      highschool_detail_id: highschool_details.id,
+      highschool_detail_id: highschool_details.id
     )
     current_user.results << result if current_user
 
