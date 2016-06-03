@@ -8,7 +8,7 @@ class Admin::DashboardController < ApplicationController
   end
 
   def users_index
-    @users = User.all
+    @users = User.where.not(role_id: Role.find_by(name: 'admin').id)
   end
 
   def import_admission_results

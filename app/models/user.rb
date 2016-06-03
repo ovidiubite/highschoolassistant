@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 
   belongs_to :role
   has_many :results
-  
+
   validates_length_of :email, maximum: 100
 
   before_create :add_role
