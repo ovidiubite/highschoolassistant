@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   root 'home#home'
 
+  get 'methodology', to:'home#methodology'
+
   # UsersController
   get 'users', to: 'users#index'
   get ':id/results_history', to: 'users#results_history', as: 'results_history'
