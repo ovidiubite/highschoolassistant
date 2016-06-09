@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     post 'import_admission_results',   to: 'dashboard#import_admission_results'
     post 'import_evaluation_results',  to: 'dashboard#import_evaluation_results'
     get 'highschools',                 to: 'dashboard#highschools'
+    get 'users_index',                 to: 'dashboard#users_index'
     get 'highschool_details/:id',      to: 'dashboard#highschool_details', as: 'highschool_details'
     post 'fetch_highschool_data',      to: 'dashboard#fetch_highschool_data'
     post 'fetch_evaluation_results',   to: 'dashboard#fetch_evaluation_results'

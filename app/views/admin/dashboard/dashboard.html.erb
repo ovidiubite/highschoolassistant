@@ -14,7 +14,7 @@
             <td><%= Highschool.count %></td>
             <%= form_tag admin_fetch_highschool_data_path, multipart: true do %>
                 <td><%= select_tag :year, options_for_select(Date.new(2004).year..Date.today.year), class:"form-control"%></td>
-                <td><%= submit_tag "Fetch data", class:"btn btn-default"%></td>
+                <td><%= submit_tag "Fetch data", class:"btn form-control"%></td>
             <% end %>
         </tr>
         <tr>
@@ -22,7 +22,7 @@
             <td><%= EvaluationResult.count %></td>
             <%= form_tag admin_fetch_evaluation_results_path, multipart: true do %>
                 <td><%= select_tag :year, options_for_select(Time.now.year-1..Time.now.year), class:"form-control"%></td>
-                <td><%= submit_tag "Fetch data", class:"btn btn-default"%></td>
+                <td><%= submit_tag "Fetch data", class:"btn form-control"%></td>
             <% end %>
         </tr>
         <tr>
@@ -30,11 +30,11 @@
             <td><%= EvaluationResult.count %></td>
             <%= form_tag admin_import_evaluation_results_path, multipart: true do %>
                 <td>
-                  <label class="btn btn-default btn-file">
+                  <label class="btn form-control btn-file">
                       File<%= file_field_tag "file", style:"display:none;" %>
                   </label>
                 </td>
-                <td><%= submit_tag "Process csv", class:"btn btn-default"%></td>
+                <td><%= submit_tag "Process csv", class:"btn form-control"%></td>
             <% end %>
         </tr>
         <tr>
@@ -42,11 +42,11 @@
             <td><%= AdmissionResult.count %></td>
             <%= form_tag admin_import_admission_results_path, multipart: true do %>
                 <td>
-                  <label class="btn btn-default btn-file">
+                  <label class="btn form-control btn-file">
                       File<%= file_field_tag "file", style:"display:none;" %>
                   </label>
                 </td>
-                <td><%= submit_tag "Process csv", class:"btn btn-default" %></td>
+                <td><%= submit_tag "Process csv", class:"btn form-control" %></td>
             <% end %>
         </tr>
     </tbody>

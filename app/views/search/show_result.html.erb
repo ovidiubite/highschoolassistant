@@ -3,14 +3,14 @@
 <% if current_user %>
     <div class="actions spacer1 spacer3">
       <p> This search was saved to your account. </p>
-      <%= link_to "View all my searches", results_history_path(current_user.id), class:"btn btn-primary normal-btn spacer2" %><br/>
+      <%= link_to "View all my searches", results_history_path(current_user.id), class:"btn normal-btn spacer2 form-control" %><br/>
     </div>
 <% else %>
     <div class="actions spacer1 spacer3">
         <p> Do you want to save the search result? </p>
-        <%= link_to "Create an account", new_user_registration_path(result: @result), class:"btn btn-primary normal-btn spacer2" %><br/>
+        <%= link_to "Create an account", new_user_registration_path(result: @result), class:"btn normal-btn spacer2 form-control" %><br/>
         <p>OR</p>
-        <%= link_to "Log in", new_user_session_path(result: @result), class:"btn btn-default normal-btn"%>
+        <%= link_to "Log in", new_user_session_path(result: @result), class:"btn normal-btn form-control"%>
     </div>
 <% end %>
 

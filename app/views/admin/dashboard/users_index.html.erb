@@ -1,0 +1,49 @@
+<h3 class="spacer1"> Users </h3><br/>
+
+<% if @users.any? %>
+    <table data-role="table" class="table"  id="admin_users">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Name</th>
+          <th>Last seen</th>
+          <th>Registered date</th>
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= user.name.blank? ? 'none' : user.name %></td>
+            <td><%= user.last_sign_in_at.to_s %></td>
+            <td><%= user.created_at.to_s %></td>
+            <td><%= link_to 'Show', user_path(user) %></td>
+            <td><%= link_to 'Edit', edit_user_registration_path %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <script>
+        $(document).ready(function(){
+            if ( $.fn.dataTable.isDataTable( '#admin_users' ) ) {
+                table = $('#admin_users').DataTable();
+            }
+            else {
+                table = $('#admin_users').DataTable( {
+                  responsive: true
+                } );
+            }
+        });
+
+    </script>
+
+<% else %>
+  <p class="spacer3 spacer1">
+      There are not any users registered yet on your app.
+  </p>
+<% end %>

@@ -12,14 +12,18 @@ var main = function(){
                data: { county_id: countyId },
                success: function(data) {
                   var highschools = $('#highschool_id');
-
+                  var sections = $("#section_id");
                   if (data.highschools.length == 0){
                       highschools.empty();
                       highschools.prop('disabled', true);
-                      highschools.append(new Option('Highschool', ''))
+                      highschools.append(new Option('---', ''))
+                      sections.empty();
+                      sections.prop('disabled', true);
+                      sections.append(new Option('---', ''))
                   }else{
                       highschools.empty();
                       highschools.prop('disabled', false);
+                      highschools.append(new Option('---', ''))
                   }
 
                   for (var x = 0; x < data.highschools.length; x++) {
@@ -32,7 +36,7 @@ var main = function(){
     };
 
     var getSections = function(){
-      $('#highschool_id').on('change', function(){
+      $('#highschool_id').on('change blur', function(){
           var highschoolId = $('#highschool_id option:selected').val();
           $.ajax ({
              type: 'get',
@@ -43,10 +47,11 @@ var main = function(){
                 if (data.sections.length == 0){
                     sections.empty();
                     sections.prop('disabled', true);
-                    sections.append(new Option('Section', ''))
+                    sections.append(new Option('---', ''))
                 }else{
                     sections.empty();
                     sections.prop('disabled', false);
+                    sections.append(new Option('---', ''))
                 }
 
                 for (var x = 0; x < data.sections.length; x++) {
@@ -57,6 +62,7 @@ var main = function(){
           });
       })
     };
+
     getHighschools();
     getSections();
 }
