@@ -72,9 +72,6 @@ class Result < ActiveRecord::Base
       min_medie_admitere = dr2.values[0].to_f
       max_medie_admitere = dr2.values[1].to_f
 
-      # p, x -float
-
-      # @TODO Change C# math expredictionession with ruby math expressions
       if( min_medie_admitere >= treshold)
          x = (max_medie_admitere - min_medie_admitere)/2 + min_medie_admitere - treshold
          p = 1 / (1 + (1/a) * Math.exp((-1)*b*x).to_f)
@@ -87,10 +84,6 @@ class Result < ActiveRecord::Base
       prediction = p * 100
       prediction.round
     end
-
-    # @TODO insert in results Table
-    # str3 = "insert into querieslog(querylog_datetime, querylog_exam, querylog_grad, querylog_threshold, querylog_prediction, querylog_version) " +
-            # "values(GETDATE(), " + evaluation_rate.to_s + ", " + graduation_rate.to_s + ", " + treshold.to_s + ", " + prediction.to_s + ", 1)";
 
     Result.create(evaluation_rate: evaluation_rate.to_s, graduation_rate: graduation_rate.to_s, percentage: prediction.to_s)
 

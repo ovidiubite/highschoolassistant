@@ -8,7 +8,6 @@
           <th>Name</th>
           <th>Last seen</th>
           <th>Registered date</th>
-          <th colspan="2">Actions</th>
         </tr>
       </thead>
 
@@ -19,14 +18,12 @@
             <td><%= user.name.blank? ? 'none' : user.name %></td>
             <td><%= user.last_sign_in_at.to_s %></td>
             <td><%= user.created_at.to_s %></td>
-            <td><%= link_to 'Show', user_path(user) %></td>
-            <td><%= link_to 'Edit', edit_user_registration_path %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
 
-    <br>
+    <br/>
 
     <script>
         $(document).ready(function(){

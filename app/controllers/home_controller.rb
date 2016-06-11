@@ -4,6 +4,11 @@ class HomeController < ApplicationController
   def home
   end
 
+  def methodology
+    pdf_filename = File.join(Rails.root, "public/files/brosura_2016.pdf")
+    send_file(pdf_filename, :filename => "brosura_2016.pdf", :disposition => 'inline', :type => "application/pdf")
+  end
+
   private
 
   def render_dashboard
