@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160527103456) do
+ActiveRecord::Schema.define(version: 20160611200437) do
 
   create_table "admission_results", force: :cascade do |t|
-    t.integer "admission_rate"
-    t.integer "evaluation_rate"
-    t.integer "graduation_rate"
-    t.integer "grade_math"
-    t.integer "grade_romana"
-    t.integer "grade_native"
-    t.string  "assigned_school"
-    t.string  "section"
-    t.string  "county"
+    t.string "admission_rate"
+    t.string "evaluation_rate"
+    t.string "graduation_rate"
+    t.string "grade_math"
+    t.string "grade_romana"
+    t.string "grade_native"
+    t.string "assigned_school"
+    t.string "section"
+    t.string "county"
   end
 
   create_table "counties", force: :cascade do |t|
