@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611200437) do
+ActiveRecord::Schema.define(version: 20160615081423) do
 
   create_table "admission_results", force: :cascade do |t|
     t.string "admission_rate"
@@ -110,6 +110,8 @@ ActiveRecord::Schema.define(version: 20160611200437) do
     t.integer  "role_id"
     t.string   "school"
     t.integer  "county_id"
+    t.string   "overall_grade"
+    t.string   "evaluation_rate"
   end
 
   add_index "users", ["county_id"], name: "index_users_on_county_id"
