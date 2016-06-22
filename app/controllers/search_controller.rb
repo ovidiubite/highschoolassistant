@@ -8,14 +8,13 @@ class SearchController < ApplicationController
     highschool_details = HighschoolDetail.where(section_id: params[:section_id], highschool_id: params[:highschool_id]).first
 
     # dummy data
-    percentage = rand(0..100).to_s
+    predict = Result.predict(params[:evaluation_rate], params[:overall_grade], highschool_details)
 
     result = Result.create(
       overall_grade: params[:overall_grade],
       evaluation_rate: params[:evaluation_rate],
-      graduation_rate: params[:graduation_rate],
       date: Date.today,
-      percentage: percentage,
+      percentage: predict,
       highschool_detail_id: highschool_details.id
     )
     current_user.results << result if current_user
