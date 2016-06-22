@@ -110,7 +110,7 @@ class DataFetcher
     county_number= 0
     pag_number = 1
     begin
-      url = "http://static.admitere.edu.ro/2015/staticRep2/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}"
+      url = "http://static.admitere.edu.ro/#{year}/staticRep2/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}"
       driver = open(url).read
     rescue OpenURI::HTTPError
       return ""
@@ -125,14 +125,14 @@ class DataFetcher
         next if t.css('td')[0].text.strip == 'Index' || t.css('td')[0].text.strip == 'Notă'
         next if t.css('td')[14].text.strip == '-'
 
-        #  grade_math      :integer
-        #  grade_romana    :integer
-        #  grade_native    :integer
-
-        highschool_details = HighschoolDetail.where(section_id: params[:section_id], highschool_id: params[:highschool_id]).first
+        # a link
+        highschool = Highschool.find_by_name(t.css('td')[13].css('a').text.strip)
+        section = Section.find_or_create_by(t.css('td')[14].css('a').text.strip)
+        highschool_details = HighschoolDetail.where(section_id: section.id, highschool_id: highschool.id).first
 
         AdmissionResults.create(county_id: County.find_or_create_by(name: county).id,
-                                section_id: Section.find_or_create_by(t.css('td')[14].text.strip),
+                                section_id: section.id,
+                                highschool_details_id: highschool_details.id
                                 evaluation_rate: t.css('td')[5].text.strip,
                                 admission_rate: t.css('td')[4].text.strip,
                                 overall_grade: t.css('td')[6].text.strip,
@@ -162,17 +162,6 @@ class DataFetcher
       end
     end
   end
-
-
-
-
-
-
-
-
-
-
-
 
   def self.rescue_http_error(county_number, highschool_number, year)
     begin

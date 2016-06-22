@@ -11,19 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615081423) do
+ActiveRecord::Schema.define(version: 20160622112207) do
 
   create_table "admission_results", force: :cascade do |t|
-    t.string "admission_rate"
-    t.string "evaluation_rate"
-    t.string "graduation_rate"
-    t.string "grade_math"
-    t.string "grade_romana"
-    t.string "grade_native"
-    t.string "assigned_school"
-    t.string "section"
-    t.string "county"
+    t.string  "admission_rate"
+    t.string  "evaluation_rate"
+    t.string  "graduation_rate"
+    t.string  "grade_math"
+    t.string  "grade_romana"
+    t.string  "grade_native"
+    t.string  "assigned_school"
+    t.integer "year"
+    t.integer "county_id"
+    t.integer "section_id"
+    t.integer "highschool_detail_id"
   end
+
+  add_index "admission_results", ["county_id"], name: "index_admission_results_on_county_id"
+  add_index "admission_results", ["highschool_detail_id"], name: "index_admission_results_on_highschool_detail_id"
+  add_index "admission_results", ["section_id"], name: "index_admission_results_on_section_id"
 
   create_table "counties", force: :cascade do |t|
     t.string   "name"
