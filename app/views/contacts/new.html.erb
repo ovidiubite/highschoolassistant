@@ -8,7 +8,7 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 spacer2 spacer3">
         <%= f.label :email, 'Email (required)' %>
-        <%= f.email_field :email, value: current_user&.email || '', class:"form-control" %>
+        <%= f.email_field :email, value: "#{current_user&.email || ''}", class:"form-control" %>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 spacer2 spacer3">
         <%= f.label :subject, 'Subject (required)' %>
