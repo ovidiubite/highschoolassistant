@@ -3,7 +3,7 @@
         <div class="navbar-center">
             <%= link_to "Log In", new_user_session_path, class:'navbar-footer-link' unless current_user %>
             <%= link_to "Account", edit_user_registration_path, class:'navbar-footer-link' if current_user %> |
-            <%= link_to "Support", new_user_registration_path, class:'navbar-footer-link' %> |
+            <%= link_to "Support", contacts_path, class:'navbar-footer-link' %> |
             <%= link_to "Sign Up", new_user_registration_path, class:'navbar-footer-link' unless current_user %>
             <%= link_to "Sign Out", destroy_user_session_path, class:'navbar-footer-link' if current_user %>
             <div class="navbar-copyright"><span>© <%= Time.now.year %> Highschool Assistant</span></div>

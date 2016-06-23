@@ -33,6 +33,12 @@ class Admin::DashboardController < ApplicationController
     redirect_to root_path, notice: 'Fetching data from www.evaluare.edu.ro in progress.'
   end
 
+  def fetch_admission_results
+    return redirect_to root_path, alert: "The data from #{params[:year]} was already processed." if AdmissionResult.where(year: params[:year]).any?
+    Resque.enqueue(HtmlDataFetchWorker, 'fetch_admission_results', params[:year])
+    redirect_to root_path, notice: 'Fetching data from www.admitere.edu.ro in progress.'
+  end
+
   def highschools
     @highschools = Highschool.all
   end

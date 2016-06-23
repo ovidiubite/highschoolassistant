@@ -45,9 +45,49 @@ class Result < ActiveRecord::Base
   # @param treshold - treshold
   #
   # @return [Float] - percentage
-  def self.predict(evaluation_rate, graduation_rate, treshold)
-    prediction = -1
+  def self.predict(evaluation_rate, graduation_rate, highschool_details)
+    if AdmissionResult.where(year: Date.today.year).empty?
+      predict_from_admission_results(evaluation_rate, graduation_rate, highschool_details)
+    else
+      predict_from_evaluation_results(evaluation_rate, graduation_rate, highschool_details)
+    end
+  end
 
+  private
+
+  def self.admission_grade(graduation_rate, evaluation_rate)
+    (graduation_rate.to_f + 3*evaluation_rate.to_f).to_f/4
+  end
+
+  def self.prediction_algorithm(min_medie_admitere, max_medie_admitere = 9.33.to_f, treshold = 7 )
+    a = 3, b = 10
+    x = (max_medie_admitere - min_medie_admitere)/2 + min_medie_admitere - treshold
+    if( min_medie_admitere >= treshold)
+       p = 1 / (1 + (1/a) * Math.exp((-1)*b*x).to_f)
+    elsif( max_medie_admitere <= treshold )
+       p = 1 / (1 + a * Math.exp((-1)*b*x).to_f)
+    else
+       p = 0.25.to_f + ((treshold - min_medie_admitere) * 0.5.to_f) / (max_medie_admitere - min_medie_admitere)
+    end
+    prediction = p * 100
+    prediction.round
+  end
+
+  def self.predict_from_admission_results(evaluation_rate, graduation_rate, highschool_details)
+    # algoritmul simplu bazat pe highschool details
+    hd = HighschoolDetail.find(highschool_details.id)
+    admission = admission_grade(evaluation_rate, graduation_rate)
+    last_rate = hd.last_rate.to_f
+    if admission >= last_rate - 0.2 && admission <= last_rate + 0.2
+      prediction_algorithm(last_rate)
+    else
+      prediction_algorithm(last_rate)
+    end
+  end
+
+  def self.predict_from_evaluation_results(evaluation_rate, graduation_rate, highschool_details)
+    prediction = -1
+    return prediction = rand(33..99)
     # tabela de evaluare nationala
     # trebuie inclus si anul si liceul...
     str1 = "select min(f1), max(f1) from import2015 where media-0.02 <= " + evaluation_rate.to_s + " and media+0.02 >= " + evaluation_rate.to_s + " ";
@@ -68,25 +108,9 @@ class Result < ActiveRecord::Base
              where mediaabsolvire-0.1 <= #{graduation_rate} and mediaabsolvire+0.1 >= #{graduation_rate}"
 
       dr2 = ActiveRecord::Base.connection.execute(str2)
-      a = 3, b = 10
       min_medie_admitere = dr2.values[0].to_f
       max_medie_admitere = dr2.values[1].to_f
-
-      if( min_medie_admitere >= treshold)
-         x = (max_medie_admitere - min_medie_admitere)/2 + min_medie_admitere - treshold
-         p = 1 / (1 + (1/a) * Math.exp((-1)*b*x).to_f)
-      elsif( max_medie_admitere <= treshold )
-         x = (max_medie_admitere - min_medie_admitere)/2 + min_medie_admitere - treshold
-         p = 1 / (1 + a * Math.exp((-1)*b*x).to_f)
-      else
-         p = 0.25.to_f + ((treshold - min_medie_admitere) * 0.5.to_f) / (max_medie_admitere - min_medie_admitere)
-      end
-      prediction = p * 100
-      prediction.round
+      prediction_algorithm(min_medie_admitere, max_medie_admitere)
     end
-
-    Result.create(evaluation_rate: evaluation_rate.to_s, graduation_rate: graduation_rate.to_s, percentage: prediction.to_s)
-
-    return prediction
   end
 end

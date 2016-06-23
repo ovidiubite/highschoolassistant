@@ -106,6 +106,62 @@ class DataFetcher
     end
   end
 
+  def self.fetch_admission_results(year = (Time.now - 1.year).year)
+    county_number= 0
+    pag_number = 1
+    begin
+      url = "http://static.admitere.edu.ro/#{year}/staticRep2/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}"
+      driver = open(url).read
+    rescue OpenURI::HTTPError
+      return ""
+    end
+    while 1
+      doc = Nokogiri::HTML(driver)
+
+      county = ApplicationHelper::HASH_COUNTIES[ApplicationHelper::COUNTIES[county_number].to_sym]
+
+      table = doc.css('table.mainTable tr')
+      table.each do |t|
+        next if t.css('td')[0].text.strip == 'Index' || t.css('td')[0].text.strip == 'Notă'
+        next if t.css('td')[14].text.strip == '-'
+
+        # a link
+        highschool = Highschool.find_by_name(t.css('td')[13].css('a').text.strip)
+        section = Section.find_or_create_by(t.css('td')[14].css('a').text.strip)
+        highschool_details = HighschoolDetail.where(section_id: section.id, highschool_id: highschool.id).first
+
+        AdmissionResults.create(county_id: County.find_or_create_by(name: county).id,
+                                section_id: section.id,
+                                highschool_details_id: highschool_details.id
+                                evaluation_rate: t.css('td')[5].text.strip,
+                                admission_rate: t.css('td')[4].text.strip,
+                                overall_grade: t.css('td')[6].text.strip,
+                                grade_romana: t.css('td')[7].text.strip,
+                                grade_math: t.css('td')[8].text.strip,
+                                year: year)
+      end
+      pag_number = pag_number + 1
+
+      begin
+        driver = open("http://static.admitere.edu.ro/2015/staticRep2/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
+        doc = Nokogiri::HTML(driver)
+      rescue OpenURI::HTTPError
+        break if county_number == 41
+        county_number = county_number + 1
+        pag_number = 1
+        begin
+          driver = open("http://static.admitere.edu.ro/2015/staticRep2/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
+          doc = Nokogiri::HTML(driver)
+        rescue OpenURI::HTTPError
+          break if county_number == 41
+          county_number = county_number + 1
+          pag_number = 1
+          driver = open("http://static.admitere.edu.ro/2015/staticRep2/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
+          doc = Nokogiri::HTML(driver)
+        end
+      end
+    end
+  end
 
   def self.rescue_http_error(county_number, highschool_number, year)
     begin

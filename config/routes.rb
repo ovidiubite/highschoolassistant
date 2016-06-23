@@ -23,6 +23,9 @@ Rails.application.routes.draw do
 
   get 'highschool_sections', to: 'highschools#highschool_sections'
 
+  match '/contacts',     to: 'contacts#new',             via: 'get'
+  resources "contacts", only: [:new, :create]
+
   namespace :admin do
     get 'dashboard',                   to: 'dashboard#dashboard'
     post 'import_highschools',         to: 'dashboard#import_highschools'
@@ -34,5 +37,6 @@ Rails.application.routes.draw do
     get 'highschool_details/:id',      to: 'dashboard#highschool_details', as: 'highschool_details'
     post 'fetch_highschool_data',      to: 'dashboard#fetch_highschool_data'
     post 'fetch_evaluation_results',   to: 'dashboard#fetch_evaluation_results'
+    post 'fetch_admission_results',   to: 'dashboard#fetch_evaluation_results'
   end
 end
