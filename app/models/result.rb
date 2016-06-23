@@ -46,48 +46,11 @@ class Result < ActiveRecord::Base
   #
   # @return [Float] - percentage
   def self.predict(evaluation_rate, graduation_rate, highschool_details)
-    prediction = -1
-    max_admitere = 10.to_f
-
     if AdmissionResult.where(year: Date.today.year).empty?
-      # algoritmul simplu bazat pe highschool details
-      hd = HighschoolDetail.find(highschool_details.id)
-      admission = admission_grade(evaluation_rate, graduation_rate)
-      last_rate = hd.last_rate.to_f
-      if admission >= last_rate - 0.2 && admission <= last_rate + 0.2
-        prediction = prediction_algorithm(last_rate)
-      else
-        prediction = prediction_algorithm(last_rate)
-      end
+      predict_from_admission_results(evaluation_rate, graduation_rate, highschool_details)
     else
-      puts "zimi ca nu am intrat aici futu-ti mortii matii"
-      return prediction = rand(33..99)
-      # tabela de evaluare nationala
-      # trebuie inclus si anul si liceul...
-      str1 = "select min(f1), max(f1) from import2015 where media-0.02 <= " + evaluation_rate.to_s + " and media+0.02 >= " + evaluation_rate.to_s + " ";
-      dr1 = ActiveRecord::Base.connection.execute(str1)
-
-      # integers
-      # @TODO check if returns what needs to return
-      pos1 = dr1.values[0]
-      pos2 = dr1.values[1]
-
-      # tabela de admitere din anul precedent
-      # trebuie inclus si anul si liceul...
-      if( (pos2 >= pos1) && (pos1 > 0) )
-        str2 = "select min(mediaadmitere), max(mediaadmitere) from
-               (select f1, position, mediaexamen, mediaadmitere, mediaabsolvire from
-               (select (row_number() over (order by mediaexamen desc)) as position, mediaexamen, mediaadmitere, mediaabsolvire, f1 from import2014 ) as imp2014
-               where position >= #{pos1} and position <= #{pos2}) as pos2014
-               where mediaabsolvire-0.1 <= #{graduation_rate} and mediaabsolvire+0.1 >= #{graduation_rate}"
-
-        dr2 = ActiveRecord::Base.connection.execute(str2)
-        min_medie_admitere = dr2.values[0].to_f
-        max_medie_admitere = dr2.values[1].to_f
-        prediction = prediction_algorithm(min_medie_admitere, max_medie_admitere)
-      end
+      predict_from_evaluation_results(evaluation_rate, graduation_rate, highschool_details)
     end
-    prediction
   end
 
   private
@@ -96,7 +59,7 @@ class Result < ActiveRecord::Base
     (graduation_rate.to_f + 3*evaluation_rate.to_f).to_f/4
   end
 
-  def self.prediction_algorithm(min_medie_admitere, max_medie_admitere = 10.to_f, treshold = 3 )
+  def self.prediction_algorithm(min_medie_admitere, max_medie_admitere = 9.33.to_f, treshold = 7 )
     a = 3, b = 10
     x = (max_medie_admitere - min_medie_admitere)/2 + min_medie_admitere - treshold
     if( min_medie_admitere >= treshold)
@@ -110,4 +73,44 @@ class Result < ActiveRecord::Base
     prediction.round
   end
 
+  def self.predict_from_admission_results(evaluation_rate, graduation_rate, highschool_details)
+    # algoritmul simplu bazat pe highschool details
+    hd = HighschoolDetail.find(highschool_details.id)
+    admission = admission_grade(evaluation_rate, graduation_rate)
+    last_rate = hd.last_rate.to_f
+    if admission >= last_rate - 0.2 && admission <= last_rate + 0.2
+      prediction_algorithm(last_rate)
+    else
+      prediction_algorithm(last_rate)
+    end
+  end
+
+  def self.predict_from_evaluation_results(evaluation_rate, graduation_rate, highschool_details)
+    prediction = -1
+    return prediction = rand(33..99)
+    # tabela de evaluare nationala
+    # trebuie inclus si anul si liceul...
+    str1 = "select min(f1), max(f1) from import2015 where media-0.02 <= " + evaluation_rate.to_s + " and media+0.02 >= " + evaluation_rate.to_s + " ";
+    dr1 = ActiveRecord::Base.connection.execute(str1)
+
+    # integers
+    # @TODO check if returns what needs to return
+    pos1 = dr1.values[0]
+    pos2 = dr1.values[1]
+
+    # tabela de admitere din anul precedent
+    # trebuie inclus si anul si liceul...
+    if( (pos2 >= pos1) && (pos1 > 0) )
+      str2 = "select min(mediaadmitere), max(mediaadmitere) from
+             (select f1, position, mediaexamen, mediaadmitere, mediaabsolvire from
+             (select (row_number() over (order by mediaexamen desc)) as position, mediaexamen, mediaadmitere, mediaabsolvire, f1 from import2014 ) as imp2014
+             where position >= #{pos1} and position <= #{pos2}) as pos2014
+             where mediaabsolvire-0.1 <= #{graduation_rate} and mediaabsolvire+0.1 >= #{graduation_rate}"
+
+      dr2 = ActiveRecord::Base.connection.execute(str2)
+      min_medie_admitere = dr2.values[0].to_f
+      max_medie_admitere = dr2.values[1].to_f
+      prediction_algorithm(min_medie_admitere, max_medie_admitere)
+    end
+  end
 end
