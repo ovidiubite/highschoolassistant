@@ -64,7 +64,7 @@ class Result < ActiveRecord::Base
   private
 
   def self.admission_grade(graduation_rate, evaluation_rate)
-    (graduation_rate.to_f + 3*evaluation_rate.to_f).to_f/4
+    ((graduation_rate.to_f + 3*evaluation_rate.to_f).to_f/4).round(2)
   end
 
   def self.prediction_algorithm(min_medie_admitere, max_medie_admitere, treshold)
@@ -84,8 +84,8 @@ class Result < ActiveRecord::Base
 
   def self.predict_from_admission_results(admission_grade, last_rate, first_rate)
     # algoritmul simplu bazat pe highschool details
-    min_medie_admitere = admission_grade - 0.2
-    max_medie_admitere = admission_grade + 0.2
+    min_medie_admitere = admission_grade - 0.02
+    max_medie_admitere = admission_grade + 0.02
     prediction_algorithm(min_medie_admitere, max_medie_admitere, last_rate)
   end
 
