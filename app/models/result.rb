@@ -50,7 +50,7 @@ class Result < ActiveRecord::Base
       # first_admission_rate = AdmissionResult.where(year: Date.today.year - 1.year, highschool_details_id: highschool_details.id).order("admission_rate DESC").last.admission_rate
       first_admission_rate = highschool_details.first_rate
 
-      last_admission_rate = highschool_details.admission_rate
+      last_admission_rate = highschool_details.last_rate
 
       admission_grade = admission_grade(graduation_rate, evaluation_rate)
 
