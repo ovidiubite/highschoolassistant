@@ -124,9 +124,9 @@ class DataFetcher
         next if t.css('th')[0].present?
 
         # a link
-        highschool = Highschool.find_by(name: t.css('td')[13].css('a').text.strip)
+        highschool = Highschool.find_by(name: t.css('td')[13].css('a').text.strip.remove_diacritics)
 
-        section = Section.find_by(name: t.css('td')[14].css('a').text.strip)
+        section = Section.find_by(name: t.css('td')[14].css('a').text.strip.remove_diacritics)
 
         next if highschool.nil? || section.nil?
 
