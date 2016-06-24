@@ -8,7 +8,7 @@ namespace :db_task do
 
   task :add_first_rate_to_highschool_details do
     HighschoolDetail.find_each do |hd|
-      first_rate = AdmissionResult.where(highscool_detail_id: hd.id).order('admission_rate DESC').first
+      first_rate = AdmissionResult.where(highschool_detail_id: hd.id).order('admission_rate DESC').first
       hd.update(first_rate: first_rate)
     end
   end
