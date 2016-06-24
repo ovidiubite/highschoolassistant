@@ -128,7 +128,7 @@ class DataFetcher
         section = Section.find_or_create_by(name: t.css('td')[14].css('a').text.strip)
         highschool_details = HighschoolDetail.where(section_id: section.id, highschool_id: highschool.id).first
 
-        AdmissionResults.create(county_id: County.find_or_create_by(name: county).id,
+        AdmissionResult.create(county_id: County.find_or_create_by(name: county).id,
                                 section_id: section.id,
                                 highschool_details_id: highschool_details.id,
                                 evaluation_rate: t.css('td')[5].text.strip,
