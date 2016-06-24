@@ -1,5 +1,3 @@
-require 'my_string.rb'
-
 namespace :db_task do
   task :remove_diacritics => :environment do
     Highschool.find_each { |h| h.update(name: h.name.remove_diacritics) }
