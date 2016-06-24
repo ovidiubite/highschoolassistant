@@ -122,7 +122,6 @@ class DataFetcher
       table = doc.css('table.mainTable tr')
       table.each do |t|
         next if t.css('th')[0].present?
-        next if t.css('td')[14].present? && t.css('td')[14].title = "Nerepartizat"
 
         # a link
         highschool = Highschool.find_by_name(t.css('td')[13].css('a').text.strip)
