@@ -47,6 +47,10 @@ class Result < ActiveRecord::Base
   # @return [Float] - percentage
   def self.predict(evaluation_rate, graduation_rate, highschool_details)
     if AdmissionResult.where(year: Date.today.year).empty?
+      first_admission_rate = AdmissionResult.where(year: Date.today.year - 1.year, highschool_details_id: highschool_details.id).order("admission_rate DESC").last.admission_rate
+      last_admission_rate = highschool_details.admission_rate
+      admission_grade = admission_grade(graduation_rate, evaluation_rate)
+
       predict_from_admission_results(evaluation_rate, graduation_rate, highschool_details)
     else
       predict_from_evaluation_results(evaluation_rate, graduation_rate, highschool_details)
@@ -74,14 +78,14 @@ class Result < ActiveRecord::Base
     prediction.round
   end
 
-  def self.predict_from_admission_results(evaluation_rate, graduation_rate, highschool_details)
+  def self.predict_from_admission_results(admission_grade, last_rate, first_rate)
     # algoritmul simplu bazat pe highschool details
-    hd = HighschoolDetail.find(highschool_details.id)
-    admission = admission_grade(graduation_rate, evaluation_rate)
-    last_rate = hd.last_rate.to_f
-    if admission >= last_rate - 0.2
-      prediction_algorithm(last_rate, 9.93.to_f)
+    if admission_grade >= last_rate - 0.2 && admission_grade < first_rate
+      prediction_algorithm(last_rate, first_rate,)
+    elsif admission_grade >= first_rate
+      100.to_f
     else
+      # cum calculam daca media este mai mica decat ultima medie de admitere de anul trecut?
       40.to_f
     end
   end

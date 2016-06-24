@@ -122,7 +122,7 @@ class DataFetcher
 
       table = doc.css('table.mainTable tr')
       table.each do |t|
-        next if t.css('td')[0].text.strip == 'Index' || t.css('td')[0].text.strip == 'Notă'
+        # next if t.css('td')[0].text.strip == 'Index' || t.css('td')[0].text.strip == 'Notă'
         next if t.css('td')[14].text.strip == '-'
 
         # a link
@@ -132,7 +132,7 @@ class DataFetcher
 
         AdmissionResults.create(county_id: County.find_or_create_by(name: county).id,
                                 section_id: section.id,
-                                highschool_details_id: highschool_details.id
+                                highschool_details_id: highschool_details.id,
                                 evaluation_rate: t.css('td')[5].text.strip,
                                 admission_rate: t.css('td')[4].text.strip,
                                 overall_grade: t.css('td')[6].text.strip,
