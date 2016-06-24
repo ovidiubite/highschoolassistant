@@ -128,11 +128,11 @@ class DataFetcher
 
         section = Section.find_by(name: t.css('td')[14].css('a').text.strip)
 
-        next if highschool.nil || section.nil
+        next if highschool.nil? || section.nil?
 
         highschool_details = HighschoolDetail.where(section_id: section.id, highschool_id: highschool.id).first
 
-        next if highschool_details.nil
+        next if highschool_details.nil?
 
         AdmissionResult.create(county_id: County.find_or_create_by(name: county).id,
                                 section_id: section.id,
