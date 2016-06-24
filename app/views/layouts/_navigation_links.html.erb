@@ -27,13 +27,13 @@
                         <li><%= link_to "Users", admin_users_index_path %></li>
                     <% else %>
                         <li><%= link_to "History", results_history_path(current_user.id) %></li>
-                        <li><%= link_to 'Contact', contacts_path %></li>
                         <li><%= link_to 'Methodology', methodology_path %></li>
+                        <li><%= link_to 'Contact', contacts_path %></li>
                     <% end %>
                 <% else %>
-                    <li><%= link_to 'About', '#' %></li>
-                    <li><%= link_to 'Contact', contacts_path %></li>
                     <li><%= link_to 'Methodology', methodology_path %></li>
+                    <li><%= link_to 'Contact', contacts_path %></li>
+                    <li><%= link_to 'About', about_path %></li>
                 <% end %>
             </ul>
         </div>

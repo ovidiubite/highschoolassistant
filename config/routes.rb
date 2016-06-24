@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root 'home#home'
 
   get 'methodology', to:'home#methodology'
+  get 'about', to:'home#about'
 
   # UsersController
   get 'users', to: 'users#index'

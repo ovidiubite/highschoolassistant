@@ -9,6 +9,9 @@ class HomeController < ApplicationController
     send_file(pdf_filename, :filename => "brosura_2016.pdf", :disposition => 'inline', :type => "application/pdf")
   end
 
+  def about
+  end
+
   private
 
   def render_dashboard
