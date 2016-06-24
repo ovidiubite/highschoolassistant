@@ -124,18 +124,22 @@ class DataFetcher
         next if t.css('th')[0].present?
 
         # a link
-        highschool = Highschool.find_or_create_by(name: t.css('td')[13].css('a').text.strip)
-        section = Section.find_or_create_by(name: t.css('td')[14].css('a').text.strip)
+        highschool = Highschool.find_by(name: t.css('td')[13].css('a').text.strip)
+
+        section = Section.find_by(name: t.css('td')[14].css('a').text.strip)
+
+        next if highschool.nil? || section.nil?
+
         highschool_details = HighschoolDetail.where(section_id: section.id, highschool_id: highschool.id).first
 
-        AdmissionResults.create(county_id: County.find_or_create_by(name: county).id,
+        next if highschool_details.nil?
+
+        AdmissionResult.create(county_id: County.find_or_create_by(name: county).id,
                                 section_id: section.id,
-                                highschool_details_id: highschool_details.id,
+                                highschool_detail_id: highschool_details.id,
                                 evaluation_rate: t.css('td')[5].text.strip,
                                 admission_rate: t.css('td')[4].text.strip,
-                                overall_grade: t.css('td')[6].text.strip,
-                                grade_romana: t.css('td')[7].text.strip,
-                                grade_math: t.css('td')[8].text.strip,
+                                graduation_rate: t.css('td')[6].text.strip,
                                 year: year)
       end
       pag_number = pag_number + 1
