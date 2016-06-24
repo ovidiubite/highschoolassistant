@@ -133,7 +133,7 @@ class DataFetcher
                                 highschool_detail_id: highschool_details.id,
                                 evaluation_rate: t.css('td')[5].text.strip,
                                 admission_rate: t.css('td')[4].text.strip,
-                                overall_grade: t.css('td')[6].text.strip,
+                                graduation_rate: t.css('td')[6].text.strip,
                                 year: year)
       end
       pag_number = pag_number + 1
