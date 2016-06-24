@@ -110,8 +110,7 @@ class DataFetcher
     county_number= 0
     pag_number = 1
     begin
-      url = "http://static.admitere.edu.ro/#{year}/staticRep2/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}"
-      driver = open(url).read
+      driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
     rescue OpenURI::HTTPError
       return ""
     end
@@ -122,7 +121,7 @@ class DataFetcher
 
       table = doc.css('table.mainTable tr')
       table.each do |t|
-        # next if t.css('td')[0].text.strip == 'Index' || t.css('td')[0].text.strip == 'Notă'
+        next if t.css('td')[0].text.strip == 'Index' || t.css('td')[0].text.strip == 'Notă'
         next if t.css('td')[14].text.strip == '-'
 
         # a link
@@ -143,20 +142,20 @@ class DataFetcher
       pag_number = pag_number + 1
 
       begin
-        driver = open("http://static.admitere.edu.ro/2015/staticRep2/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
+        driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
         doc = Nokogiri::HTML(driver)
       rescue OpenURI::HTTPError
         break if county_number == 41
         county_number = county_number + 1
         pag_number = 1
         begin
-          driver = open("http://static.admitere.edu.ro/2015/staticRep2/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
+          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
           doc = Nokogiri::HTML(driver)
         rescue OpenURI::HTTPError
           break if county_number == 41
           county_number = county_number + 1
           pag_number = 1
-          driver = open("http://static.admitere.edu.ro/2015/staticRep2/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
+          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
           doc = Nokogiri::HTML(driver)
         end
       end
