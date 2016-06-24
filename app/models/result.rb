@@ -42,20 +42,17 @@ class Result < ActiveRecord::Base
   # calculate percentage
   # @param evaluation_rate // media evaluare nationala
   # @param graduation_rate // media absolvire
-  # @param treshold - treshold
   #
   # @return [Float] - percentage
   def self.predict(evaluation_rate, graduation_rate, highschool_details)
     if AdmissionResult.where(year: Date.today.year).empty?
-      # first_admission_rate = AdmissionResult.where(year: Date.today.year - 1.year, highschool_details_id: highschool_details.id).order("admission_rate DESC").last.admission_rate
       last_admission_rate = highschool_details.last_rate.squish
 
       admission_grade = admission_grade(graduation_rate, evaluation_rate)
 
       predict_from_admission_results(admission_grade.to_f, last_admission_rate.to_f)
     else
-
-      # predict_from_evaluation_results(evaluation_rate, graduation_rate, highschool_details)
+      predict_from_evaluation_results(evaluation_rate, graduation_rate, highschool_details)
     end
   end
 
