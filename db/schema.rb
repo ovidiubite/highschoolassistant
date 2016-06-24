@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624085657) do
+ActiveRecord::Schema.define(version: 20160624143513) do
 
   create_table "admission_results", force: :cascade do |t|
     t.string  "admission_rate"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160624085657) do
     t.integer "county_id"
     t.integer "section_id"
     t.integer "highschool_detail_id"
+    t.integer "position"
   end
 
   add_index "admission_results", ["county_id"], name: "index_admission_results_on_county_id"
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160624085657) do
     t.string  "school"
     t.integer "county_id"
     t.integer "year"
+    t.integer "position"
   end
 
   add_index "evaluation_results", ["county_id"], name: "index_evaluation_results_on_county_id"
@@ -98,6 +100,14 @@ ActiveRecord::Schema.define(version: 20160624085657) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tmp", id: false, force: :cascade do |t|
+    t.integer "id"
+  end
+
+  create_table "tmp1", id: false, force: :cascade do |t|
+    t.integer "id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -84,29 +84,24 @@ class Result < ActiveRecord::Base
 
   def self.predict_from_admission_results(admission_grade, last_rate, first_rate)
     # algoritmul simplu bazat pe highschool details
-    if admission_grade >= last_rate.to_f - 0.2 && admission_grade < first_rate
-      prediction_algorithm(last_rate, first_rate, last_rate)
-    elsif admission_grade >= first_rate
-      99.9.to_f
-    else
-      # cum calculam daca media este mai mica decat ultima medie de admitere de anul trecut?
-      40.to_f
-    end
+    min_medie_admitere = admission_grade - 0.2
+    max_medie_admitere = admission_grade + 0.2
+    prediction_algorithm(min_medie_admitere, max_medie_admitere, last_rate)
   end
 
   def self.predict_from_evaluation_results(evaluation_rate, graduation_rate, highschool_details)
     prediction = -1
-    return prediction = rand(33..99)
-    # tabela de evaluare nationala
-    # trebuie inclus si anul si liceul...
-    str1 = "select min(f1), max(f1) from import2015 where media-0.02 <= " + evaluation_rate.to_s + " and media+0.02 >= " + evaluation_rate.to_s + " ";
-    dr1 = ActiveRecord::Base.connection.execute(str1)
+
+    this_year_results = EvaluationResult.select("position")
+      .where("year = (?) AND county_id = (?)", Date.today.year, county.id)
+      .where("CAST(evaluation_rate AS FLOAT)-0.02 <= (?)", evaluation_rate.to_f)
+      .where("CAST(evaluation_rate AS FLOAT)+0.02 >= (?)", evaluation_rate.to_f)
 
     # integers
-    # @TODO check if returns what needs to return
-    pos1 = dr1.values[0]
-    pos2 = dr1.values[1]
+    pos1 = this_year_results.last.position
+    pos2 = dr1.first.position
 
+    # @TODO continua pe evaluation results
     # tabela de admitere din anul precedent
     # trebuie inclus si anul si liceul...
     if( (pos2 >= pos1) && (pos1 > 0) )
