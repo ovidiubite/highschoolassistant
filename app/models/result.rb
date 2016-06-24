@@ -63,7 +63,7 @@ class Result < ActiveRecord::Base
     (graduation_rate.to_f + 3*evaluation_rate.to_f).to_f/4
   end
 
-  def self.prediction_algorithm(min_medie_admitere, max_medie_admitere = 9.93.to_f, treshold = 10 )
+  def self.prediction_algorithm(min_medie_admitere, max_medie_admitere, treshold = 10 )
     a = 3
     b = 10
     x = (max_medie_admitere - min_medie_admitere)/2 + min_medie_admitere - treshold

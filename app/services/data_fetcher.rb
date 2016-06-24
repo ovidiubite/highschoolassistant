@@ -130,7 +130,7 @@ class DataFetcher
 
         next if highschool.nil? || section.nil?
 
-        highschool_details = HighschoolDetail.where(section_id: section.id, highschool_id: highschool.id).first
+        highschool_details = HighschoolDetail.where(section_id: section.id, highschool_id: highschool.id, year: year).first
 
         next if highschool_details.nil?
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160622112207) do
+ActiveRecord::Schema.define(version: 20160624085657) do
 
   create_table "admission_results", force: :cascade do |t|
     t.string  "admission_rate"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20160622112207) do
     t.datetime "updated_at",      null: false
     t.integer  "section_id"
     t.integer  "highschool_id"
+    t.string   "first_rate"
   end
 
   add_index "highschool_details", ["highschool_id"], name: "index_highschool_details_on_highschool_id"
