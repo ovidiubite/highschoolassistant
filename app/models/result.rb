@@ -48,13 +48,11 @@ class Result < ActiveRecord::Base
   def self.predict(evaluation_rate, graduation_rate, highschool_details)
     if AdmissionResult.where(year: Date.today.year).empty?
       # first_admission_rate = AdmissionResult.where(year: Date.today.year - 1.year, highschool_details_id: highschool_details.id).order("admission_rate DESC").last.admission_rate
-      first_admission_rate = highschool_details.first_rate.squish
-
       last_admission_rate = highschool_details.last_rate.squish
 
       admission_grade = admission_grade(graduation_rate, evaluation_rate)
 
-      predict_from_admission_results(admission_grade.to_f, last_admission_rate.to_f, first_admission_rate.to_f)
+      predict_from_admission_results(admission_grade.to_f, last_admission_rate.to_f)
     else
 
       # predict_from_evaluation_results(evaluation_rate, graduation_rate, highschool_details)
@@ -82,7 +80,7 @@ class Result < ActiveRecord::Base
     prediction.round
   end
 
-  def self.predict_from_admission_results(admission_grade, last_rate, first_rate)
+  def self.predict_from_admission_results(admission_grade, last_rate)
     # algoritmul simplu bazat pe highschool details
     min_medie_admitere = admission_grade - 0.02
     max_medie_admitere = admission_grade + 0.02
