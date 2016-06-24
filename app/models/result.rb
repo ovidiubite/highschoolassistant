@@ -67,7 +67,7 @@ class Result < ActiveRecord::Base
     (graduation_rate.to_f + 3*evaluation_rate.to_f).to_f/4
   end
 
-  def self.prediction_algorithm(min_medie_admitere, max_medie_admitere, treshold = 10 )
+  def self.prediction_algorithm(min_medie_admitere, max_medie_admitere, treshold)
     a = 3
     b = 10
     x = (max_medie_admitere - min_medie_admitere)/2 + min_medie_admitere - treshold
@@ -85,9 +85,9 @@ class Result < ActiveRecord::Base
   def self.predict_from_admission_results(admission_grade, last_rate, first_rate)
     # algoritmul simplu bazat pe highschool details
     if admission_grade >= last_rate - 0.2 && admission_grade < first_rate
-      prediction_algorithm(last_rate, first_rate)
+      prediction_algorithm(last_rate, first_rate, last_rate)
     elsif admission_grade >= first_rate
-      100.to_f
+      99.9.to_f
     else
       # cum calculam daca media este mai mica decat ultima medie de admitere de anul trecut?
       40.to_f
