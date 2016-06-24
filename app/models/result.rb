@@ -54,7 +54,7 @@ class Result < ActiveRecord::Base
 
       admission_grade = admission_grade(graduation_rate, evaluation_rate)
 
-      predict_from_admission_results(admission_grade, last_admission_rate, first_admission_rate)
+      predict_from_admission_results(admission_grade.to_f, last_admission_rate.to_f, first_admission_rate.to_f)
     else
 
       # predict_from_evaluation_results(evaluation_rate, graduation_rate, highschool_details)
@@ -84,7 +84,7 @@ class Result < ActiveRecord::Base
 
   def self.predict_from_admission_results(admission_grade, last_rate, first_rate)
     # algoritmul simplu bazat pe highschool details
-    if admission_grade >= last_rate - 0.2 && admission_grade < first_rate
+    if admission_grade >= last_rate.to_f - 0.2 && admission_grade < first_rate
       prediction_algorithm(last_rate, first_rate, last_rate)
     elsif admission_grade >= first_rate
       99.9.to_f
