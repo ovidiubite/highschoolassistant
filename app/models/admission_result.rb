@@ -2,19 +2,26 @@
 #
 # Table name: admission_results
 #
-#  id              :integer          not null, primary key
-#  admission_rate  :integer
-#  evaluation_rate :integer
-#  graduation_rate :integer
-#  grade_math      :integer
-#  grade_romana    :integer
-#  grade_native    :integer
-#  assigned_school :string
-#  section         :string
-#  county          :string
+#  id                   :integer          not null, primary key
+#  admission_rate       :string
+#  evaluation_rate      :string
+#  graduation_rate      :string
+#  grade_math           :string
+#  grade_romana         :string
+#  grade_native         :string
+#  assigned_school      :string
+#  year                 :integer
+#  county_id            :integer
+#  section_id           :integer
+#  highschool_detail_id :integer
+#  position             :integer
 #
 
 class AdmissionResult < ActiveRecord::Base
+
+  belongs_to :county
+  belongs_to :section
+  belongs_to :highschool_detail
 
   def self.import_data(row)
     create!(admission_rate: row['AdmissionRate'],

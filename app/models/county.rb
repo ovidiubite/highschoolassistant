@@ -12,4 +12,5 @@
 class County < ActiveRecord::Base
   has_many :highschools
   has_many :evaluation_results
+  has_many :admission_results
 end

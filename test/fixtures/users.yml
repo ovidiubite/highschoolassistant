@@ -19,6 +19,8 @@
 #  role_id                :integer
 #  school                 :string
 #  county_id              :integer
+#  overall_grade          :string
+#  evaluation_rate        :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

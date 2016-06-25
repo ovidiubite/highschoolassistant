@@ -10,6 +10,7 @@
 #  updated_at      :datetime         not null
 #  section_id      :integer
 #  highschool_id   :integer
+#  first_rate      :string
 #
 
 require 'test_helper'

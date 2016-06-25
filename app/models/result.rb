@@ -2,16 +2,16 @@
 #
 # Table name: results
 #
-#  id                    :integer          not null, primary key
-#  percentage            :string
-#  overall_grade         :string
-#  evaluation_rate       :string
-#  graduation_rate       :string
-#  date                  :date
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  highschool_details_id :integer
-#  user_id               :integer
+#  id                   :integer          not null, primary key
+#  percentage           :string
+#  overall_grade        :string
+#  evaluation_rate      :string
+#  graduation_rate      :string
+#  date                 :date
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  highschool_detail_id :integer
+#  user_id              :integer
 #
 
 class Result < ActiveRecord::Base

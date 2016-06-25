@@ -10,5 +10,7 @@
 
 class Section < ActiveRecord::Base
   has_many :highschool_details
+  has_many :admission_results
+
   validates_presence_of :name, uniqueness: true
 end

@@ -9,6 +9,8 @@
 #  grade_native    :integer
 #  school          :string
 #  county_id       :integer
+#  year            :integer
+#  position        :integer
 #
 
 class EvaluationResult < ActiveRecord::Base

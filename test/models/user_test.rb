@@ -19,6 +19,8 @@
 #  role_id                :integer
 #  school                 :string
 #  county_id              :integer
+#  overall_grade          :string
+#  evaluation_rate        :string
 #
 
 require 'test_helper'
