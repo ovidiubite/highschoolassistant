@@ -1,4 +1,5 @@
 class DataFetcher
+  require 'my_string.rb'
   include ApplicationHelper
   require 'nokogiri'
   require 'open-uri'

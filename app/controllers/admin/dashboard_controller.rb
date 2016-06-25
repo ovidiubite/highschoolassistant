@@ -40,7 +40,7 @@ class Admin::DashboardController < ApplicationController
   end
 
   def highschools
-    @highschools = Highschool.all
+    @highschools = Highschool.all.order('name DESC')
   end
 
   def highschool_details

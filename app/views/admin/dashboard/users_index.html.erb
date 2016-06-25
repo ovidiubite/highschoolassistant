@@ -8,6 +8,7 @@
           <th>Name</th>
           <th>Last seen</th>
           <th>Registered date</th>
+          <th>Number of queries</th>
         </tr>
       </thead>
 
@@ -18,6 +19,7 @@
             <td><%= user.name.blank? ? 'none' : user.name %></td>
             <td><%= user.last_sign_in_at.to_s %></td>
             <td><%= user.created_at.to_s %></td>
+            <td><%= user.results.count if user.results.any? %></td>
           </tr>
         <% end %>
       </tbody>
