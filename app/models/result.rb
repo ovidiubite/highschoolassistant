@@ -65,7 +65,7 @@ class Result < ActiveRecord::Base
   def self.prediction_algorithm(min_medie_admitere, max_medie_admitere, treshold)
     # cresterea exponentiala
     a = 1
-    b = 3
+    b = 6
     x = (max_medie_admitere - min_medie_admitere)/2 + min_medie_admitere - treshold
     if( min_medie_admitere >= treshold)
        p = 1 / (1 + (1/a) * Math.exp((-1)*b*x).to_f)
