@@ -102,14 +102,6 @@ ActiveRecord::Schema.define(version: 20160624143513) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tmp", id: false, force: :cascade do |t|
-    t.integer "id"
-  end
-
-  create_table "tmp1", id: false, force: :cascade do |t|
-    t.integer "id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",                          null: false
