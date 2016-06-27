@@ -48,6 +48,7 @@ GEM
     byebug (8.2.2)
     c3-rails (0.4.11)
     cancancan (1.13.1)
+    charlock_holmes (0.7.3)
     client_side_validations (4.2.3)
       jquery-rails (>= 3.1.2, < 5.0.0)
       js_regex (~> 1.0, >= 1.0.9)
@@ -226,6 +227,7 @@ DEPENDENCIES
   byebug
   c3-rails
   cancancan (~> 1.10)
+  charlock_holmes
   client_side_validations
   coffee-rails (~> 4.1.0)
   d3-rails

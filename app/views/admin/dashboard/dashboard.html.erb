@@ -41,7 +41,7 @@
             <td>Admission Results</td>
             <td><%= AdmissionResult.count %></td>
             <%= form_tag admin_fetch_admission_results_path, multipart: true do %>
-                <td><%= select_tag :year, options_for_select(Time.now.year-1..Time.now.year), class:"form-control"%></td>
+                <td><%= select_tag :year, options_for_select(2004..Time.now.year), class:"form-control"%></td>
                 <td><%= submit_tag "Fetch data", class:"btn form-control"%></td>
             <% end %>
         </tr>

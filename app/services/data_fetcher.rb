@@ -4,13 +4,14 @@ class DataFetcher
   require 'nokogiri'
   require 'open-uri'
   require 'resolv-replace'
+  require 'charlock_holmes'
 
   def self.fetch_highschools(year = Date.today.year)
     highschool_number = 101
     county_number= 0
 
-    driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/lic/#{highschool_number}/").read
-  	while 1
+    driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/lic/#{highschool_number}/").binmode.read
+    while 1
   		doc = Nokogiri::HTML(driver)
 
   		county = ApplicationHelper::HASH_COUNTIES[ApplicationHelper::COUNTIES[county_number].to_sym]
@@ -38,20 +39,20 @@ class DataFetcher
       # break if county_number == 41
 
       begin
-        driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/lic/#{highschool_number}/").read
+        driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/lic/#{highschool_number}/").binmode.read
         doc = Nokogiri::HTML(driver)
   		rescue OpenURI::HTTPError
         break if county_number == 41
   			county_number = county_number + 1
         highschool_number = 101
         begin
-          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/lic/#{highschool_number}/").read
+          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/lic/#{highschool_number}/").binmode.read
   			  doc = Nokogiri::HTML(driver)
         rescue OpenURI::HTTPError
           break if county_number == 41
           county_number = county_number + 1
           highschool_number = 101
-          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/lic/#{highschool_number}/").read
+          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/lic/#{highschool_number}/").binmode.read
   			  doc = Nokogiri::HTML(driver)
         end
       end
@@ -62,7 +63,7 @@ class DataFetcher
     county_number= 0
     pag_number = 1
     begin
-      driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read
+      driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").binmod.read
     rescue OpenURI::HTTPError
       return ""
     end
@@ -87,20 +88,20 @@ class DataFetcher
       pag_number = pag_number + 1
 
       begin
-        driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read
+        driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").binmode.read
         doc = Nokogiri::HTML(driver)
       rescue OpenURI::HTTPError
         break if county_number == 41
         county_number = county_number + 1
         pag_number = 1
         begin
-          driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read
+          driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").binmode.read
           doc = Nokogiri::HTML(driver)
         rescue OpenURI::HTTPError
           break if county_number == 41
           county_number = county_number + 1
           pag_number = 1
-          driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read
+          driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").binmode.read
           doc = Nokogiri::HTML(driver)
         end
       end
@@ -111,9 +112,17 @@ class DataFetcher
     county_number= 0
     pag_number = 1
     begin
-      driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
+      driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
+      if !driver.is_utf8?
+        detection = CharlockHolmes::EncodingDetector.detect(driver)
+        driver = CharlockHolmes::Converter.convert driver, detection[:encoding], 'UTF-8'
+      end
     rescue OpenURI::HTTPError
-      return ""
+      if !driver.is_utf8?
+        detection = CharlockHolmes::EncodingDetector.detect(driver)
+        driver = CharlockHolmes::Converter.convert driver, detection[:encoding], 'UTF-8'
+      end
+      # return ""
     end
     while 1
       doc = Nokogiri::HTML(driver)
@@ -146,20 +155,20 @@ class DataFetcher
       pag_number = pag_number + 1
 
       begin
-        driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
+        driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
         doc = Nokogiri::HTML(driver)
       rescue OpenURI::HTTPError
         break if county_number == 41
         county_number = county_number + 1
         pag_number = 1
         begin
-          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
+          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
           doc = Nokogiri::HTML(driver)
         rescue OpenURI::HTTPError
           break if county_number == 41
           county_number = county_number + 1
           pag_number = 1
-          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").read
+          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
           doc = Nokogiri::HTML(driver)
         end
       end
@@ -168,7 +177,7 @@ class DataFetcher
 
   def self.rescue_http_error(county_number, highschool_number, year)
     begin
-      driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/lic/#{highschool_number}/").read
+      driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/lic/#{highschool_number}/").binmode.read
       doc = Nokogiri::HTML(driver)
       return county_number, highschool_number, doc
     rescue OpenURI::HTTPError

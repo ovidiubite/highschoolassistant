@@ -1,0 +1,44 @@
+<div id="chart" class="spacer1 spacer3"></div>
+<%
+@evaluation_grade
+@graudation_grade
+@admission_grade
+
+%>
+<script>
+    $(document).on('ready', function(){
+      var evaluation_grade = <%= @evaluation_grade %>;
+      var graudation_grade = <%= @graudation_grade %>;
+      var admission_grade = <%= @admission_grade %>;
+      var evaluare_nationala = ['Evaluare nationala 2015'];
+      evaluation_grade.forEach(function(entry) {
+                          evaluare_nationala.push(entry)
+                        });
+
+      var medie_absolvire = ['Medie Absolvire 2015'];
+      graudation_grade.forEach(function(entry) {
+                          medie_absolvire.push(entry)
+                        });
+
+      var media_admitere = ['Medie Admitere 2015'];
+      admission_grade.forEach(function(entry) {
+                          media_admitere.push(entry)
+                        });
+
+      var chart = c3.generate({
+            data: {
+                columns: [
+                    evaluare_nationala,
+                    medie_absolvire,
+                    media_admitere
+                ]
+            }
+        });
+
+        axis: {
+          y2: {
+            show: true // ADD
+          }
+        }
+    })
+</script>
