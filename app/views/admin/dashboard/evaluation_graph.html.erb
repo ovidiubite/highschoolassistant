@@ -10,9 +10,15 @@
       var evaluation_grade = <%= @evaluation_grade %>;
       var graudation_grade = <%= @graudation_grade %>;
       var admission_grade = <%= @admission_grade %>;
+      var evaluation_grade2014 = <%= @evaluation_grade2014 %>;
       var evaluare_nationala = ['Evaluare nationala 2015'];
+
       evaluation_grade.forEach(function(entry) {
                           evaluare_nationala.push(entry)
+                        });
+      var evaluare_nationala2014 = ['Evaluare nationala 2014'];
+      evaluation_grade2014.forEach(function(entry) {
+                          evaluare_nationala2014.push(entry)
                         });
 
       var medie_absolvire = ['Medie Absolvire 2015'];
@@ -29,8 +35,9 @@
             data: {
                 columns: [
                     evaluare_nationala,
-                    medie_absolvire,
-                    media_admitere
+                    evaluare_nationala2014
+                    // medie_absolvire,
+                    // media_admitere
                 ]
             }
         });

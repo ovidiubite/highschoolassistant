@@ -112,11 +112,13 @@ class DataFetcher
     county_number= 0
     pag_number = 1
     begin
-      driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
-      if !driver.is_utf8?
-        detection = CharlockHolmes::EncodingDetector.detect(driver)
-        driver = CharlockHolmes::Converter.convert driver, detection[:encoding], 'UTF-8'
-      end
+      # driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
+      drive = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}") do |f|
+               Encoding.default_external = f.charset
+               html = f.read
+              end
+
+
     rescue OpenURI::HTTPError
       if !driver.is_utf8?
         detection = CharlockHolmes::EncodingDetector.detect(driver)
@@ -155,20 +157,35 @@ class DataFetcher
       pag_number = pag_number + 1
 
       begin
-        driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
+        drive = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}") do |f|
+                 Encoding.default_external = f.charset
+                 html = f.read
+                end
+
+        # driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
         doc = Nokogiri::HTML(driver)
       rescue OpenURI::HTTPError
         break if county_number == 41
         county_number = county_number + 1
         pag_number = 1
         begin
-          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
+          drive = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}") do |f|
+                   Encoding.default_external = f.charset
+                   html = f.read
+                  end
+
+          # driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
           doc = Nokogiri::HTML(driver)
         rescue OpenURI::HTTPError
           break if county_number == 41
           county_number = county_number + 1
           pag_number = 1
-          driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
+          drive = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}") do |f|
+                   Encoding.default_external = f.charset
+                   html = f.read
+                  end
+
+          # driver = open("http://static.admitere.edu.ro/#{year}/staticRepI/j/#{ApplicationHelper::COUNTIES[county_number]}/cina/page_#{pag_number}").binmode.read
           doc = Nokogiri::HTML(driver)
         end
       end
