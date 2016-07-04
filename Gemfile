@@ -23,7 +23,7 @@ gem 'jquery-inputmask-rails'
 gem 'c3-rails'
 gem "d3-rails"
 gem 'mail_form'
-
+gem 'charlock_holmes'
 group :development, :test do
   gem 'byebug'
   gem 'awesome_print'
