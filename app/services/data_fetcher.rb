@@ -74,6 +74,8 @@ class DataFetcher
       county = ApplicationHelper::HASH_COUNTIES[ApplicationHelper::COUNTIES[county_number].to_sym]
 
       table = doc.css('table.mainTable tr')
+
+
       table.each do |t|
         next if t.css('td')[0].text.strip == 'Index' || t.css('td')[0].text.strip == 'Notă'
         next if t.css('td')[14].text.strip == '-'
@@ -91,8 +93,12 @@ class DataFetcher
       end
       pag_number = pag_number + 1
 
-      begin
+      if table.length < 3
+        pag_number = 1
+        county_number = county_number + 1
+      end
 
+      begin
         driver = open("http://static.evaluare.edu.ro/Evaluare/CandFromJudIAD.aspx?Jud=#{county_number + 1}&Poz=0&PageN=#{pag_number}").read if year = Time.now.year
         driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read unless year = Time.now.year
         doc = Nokogiri::HTML(driver)

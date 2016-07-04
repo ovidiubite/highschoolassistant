@@ -45,7 +45,7 @@ class Result < ActiveRecord::Base
   #
   # @return [Float] - percentage
   def self.predict(evaluation_rate, graduation_rate, highschool_details)
-    if EvaluationResult.where(year: Date.today.year).empty?
+    if EvaluationResult.where(year: Date.today.year, county_id: highschool_details.highschool.county_id).empty?
       last_admission_rate = highschool_details.last_rate.squish
 
       admission_grade = admission_grade(graduation_rate, evaluation_rate)

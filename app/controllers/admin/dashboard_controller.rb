@@ -49,7 +49,7 @@ class Admin::DashboardController < ApplicationController
 
   def evaluation_graph
     @evaluation_grade = AdmissionResult.select('id, evaluation_rate').where(county_id: County.find_by(alias: 'TM'), year: 2015).order('evaluation_rate DESC').collect{ |x| x.evaluation_rate.to_f }
-    @evaluation_grade2014 = AdmissionResult.select('id, evaluation_rate').where(county_id: County.find_by(alias: 'B'), year: 2015).order('evaluation_rate DESC').collect{ |x| x.evaluation_rate.to_f }
+    @evaluation_grade2014 = AdmissionResult.select('id, evaluation_rate').where(county_id: County.find_by(alias: 'CJ'), year: 2015).order('evaluation_rate DESC').collect{ |x| x.evaluation_rate.to_f }
     @graudation_grade = AdmissionResult.select('id, graduation_rate').where(county_id: County.find_by(alias: 'TM'), year: 2015).order('graduation_rate DESC').map{ |x| x.graduation_rate.to_f }
     @admission_grade = AdmissionResult.select('id, admission_rate').where(county_id: County.find_by(alias: 'TM'), year: 2015).order('admission_rate DESC').map{ |x| x.admission_rate.to_f }
   end
