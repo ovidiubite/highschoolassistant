@@ -63,7 +63,8 @@ class DataFetcher
     county_number= 0
     pag_number = 1
     begin
-      driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").binmod.read
+      driver = open("http://static.evaluare.edu.ro/Evaluare/CandFromJudIAD.aspx?Jud=#{county_number + 1}&Poz=0&PageN=#{pag_number}").read if year = Time.now.year
+      driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read unless year = Time.now.year
     rescue OpenURI::HTTPError
       return ""
     end
@@ -80,28 +81,37 @@ class DataFetcher
         #  grade_math      :integer
         #  grade_romana    :integer
         #  grade_native    :integer
-        EvaluationResult.create(county_id: County.find_or_create_by(name: county).id,
+        ev = EvaluationResult.create(county_id: County.find_or_create_by(name: county).id,
                                 school: t.css('td')[3].text.strip,
                                 evaluation_rate: t.css('td')[14].text.strip,
-                                year: year)
+                                year: year,
+                                position: t.css('td')[2].text.strip.to_i)
+
+        ev.save!
       end
       pag_number = pag_number + 1
 
       begin
-        driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").binmode.read
+
+        driver = open("http://static.evaluare.edu.ro/Evaluare/CandFromJudIAD.aspx?Jud=#{county_number + 1}&Poz=0&PageN=#{pag_number}").read if year = Time.now.year
+        driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read unless year = Time.now.year
         doc = Nokogiri::HTML(driver)
       rescue OpenURI::HTTPError
         break if county_number == 41
         county_number = county_number + 1
         pag_number = 1
         begin
-          driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").binmode.read
+
+          driver = open("http://static.evaluare.edu.ro/Evaluare/CandFromJudIAD.aspx?Jud=#{county_number + 1}&Poz=0&PageN=#{pag_number}").read if year = Time.now.year
+          driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read unless year = Time.now.year
           doc = Nokogiri::HTML(driver)
         rescue OpenURI::HTTPError
           break if county_number == 41
           county_number = county_number + 1
           pag_number = 1
-          driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").binmode.read
+
+          driver = open("http://static.evaluare.edu.ro/Evaluare/CandFromJudIAD.aspx?Jud=#{county_number + 1}&Poz=0&PageN=#{pag_number}").read if year = Time.now.year
+          driver = open("http://static.evaluare.edu.ro/#{year}/rapoarte/j/#{ApplicationHelper::COUNTIES[county_number]}/cand/m/page_#{pag_number}").read unless year = Time.now.year
           doc = Nokogiri::HTML(driver)
         end
       end

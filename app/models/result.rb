@@ -45,7 +45,7 @@ class Result < ActiveRecord::Base
   #
   # @return [Float] - percentage
   def self.predict(evaluation_rate, graduation_rate, highschool_details)
-    if AdmissionResult.where(year: Date.today.year).empty?
+    if EvaluationResult.where(year: Date.today.year).empty?
       last_admission_rate = highschool_details.last_rate.squish
 
       admission_grade = admission_grade(graduation_rate, evaluation_rate)
@@ -64,6 +64,9 @@ class Result < ActiveRecord::Base
 
   def self.prediction_algorithm(min_medie_admitere, max_medie_admitere, treshold)
     # cresterea exponentiala
+    min_medie_admitere = min_medie_admitere.to_f
+    max_medie_admitere = max_medie_admitere.to_f
+    treshold = treshold.to_f
     a = 1
     b = 6
     x = (max_medie_admitere - min_medie_admitere)/2 + min_medie_admitere - treshold
@@ -95,18 +98,29 @@ class Result < ActiveRecord::Base
       .where("CAST(evaluation_rate AS FLOAT)+0.02 >= (?)", evaluation_rate.to_f)
 
     # integers
+    # cea mai mica
     pos1 = this_year_results.last.position
-    pos2 = dr1.first.position
+    # cea mai mare
+    pos2 = this_year_results.first.position
 
-    str2 = "select min(admission_rate), max(admission_rate) from
-    (select position, evaluation_rate, admission_rate, graduation_rate from
-    (select position, evaluation_rate, admission_rate, graduation_rate from admission_results ) as presentYear
-    where county_id = #{county.id} AND year = #{Date.today.year} AND position >= #{pos1} AND position <= #{pos2}) as lastYear
-    where graduation_rate-0.1 <= #{graduation_rate} AND graduation_rate+0.1 >= #{graduation_rate}"
 
-    dr2 = ActiveRecord::Base.connection.execute(str2)
-    min_medie_admitere = dr2.values[0].to_f
-    max_medie_admitere = dr2.values[1].to_f
+    # str2 = "select min(admission_rate), max(admission_rate) from
+    # (select position, evaluation_rate, admission_rate, graduation_rate from
+    # (select position, evaluation_rate, admission_rate, graduation_rate from admission_results ) as presentYear
+    # where county_id = #{county.id} AND year = #{Date.today.year - 1} AND position >= #{pos1} AND position <= #{pos2}) as lastYear
+    # where graduation_rate-0.1 <= #{graduation_rate} AND graduation_rate+0.1 >= #{graduation_rate}"
+
+    last_year_results = AdmissionResult.select("admission_rate")
+      .where("year = (?) AND county_id = (?)", Date.today.year.to_i - 1, county.id)
+      .where("position >= (?) AND position <= (?)", pos1, pos2)
+
+    # dr2 = ActiveRecord::Base.connection.execute(str2)
+    # min_medie_admitere = dr2.values[0].to_f
+    # max_medie_admitere = dr2.values[1].to_f
+
+    min_medie_admitere = last_year_results.first.to_f
+    max_medie_admitere = last_year_results.last.to_f
+
     prediction_algorithm(min_medie_admitere, max_medie_admitere, last_rate)
   end
 end
