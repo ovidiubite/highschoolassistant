@@ -63,17 +63,12 @@ class Result < ActiveRecord::Base
 
   def self.prediction_algorithm(min_medie_admitere, max_medie_admitere, treshold)
     # cresterea exponentiala
-    ap min_medie_admitere
 
     min_medie_admitere = min_medie_admitere.to_f
 
-    ap min_medie_admitere
-
     max_medie_admitere = max_medie_admitere.to_f
-    ap treshold
 
     treshold = treshold.gsub(/[^\d^\.]/, '').to_f
-    ap treshold
     a = 1
     b = 6
     x = (max_medie_admitere - min_medie_admitere)/2 + min_medie_admitere - treshold
@@ -117,8 +112,6 @@ class Result < ActiveRecord::Base
     # where county_id = #{county.id} AND year = #{Date.today.year - 1} AND position >= #{pos1} AND position <= #{pos2}) as lastYear
     # where graduation_rate-0.1 <= #{graduation_rate} AND graduation_rate+0.1 >= #{graduation_rate}"
 
-    ap pos1
-    ap pos2
     last_year_results = AdmissionResult.select("admission_rate")
       .where("year = (?) AND county_id = (?)", Date.today.year.to_i - 1, county.id)
       .where("position <= (?) AND position >= (?)", pos1, pos2)
